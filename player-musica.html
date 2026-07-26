@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#06111d">
+  <title>JC-APK TV | Player de Música</title>
+  <link rel="stylesheet" href="dados/jc-responsive-backgrounds.css?v=20260720-02">
+  <style>
+    :root{--line:rgba(129,184,218,.20);--green:#2bd391;--muted:#9fb4c2}
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;display:grid;place-items:center;padding:22px;background:radial-gradient(circle at top,#123248,#030a11 60%);color:#fff;font-family:Arial,system-ui,sans-serif}
+    .wrap{width:min(780px,100%);display:grid;gap:14px}
+    .head{padding:20px;border:1px solid var(--line);border-radius:24px;background:rgba(6,19,31,.86);box-shadow:0 24px 70px rgba(0,0,0,.34)}
+    .head h1{margin:0 0 8px;font-size:24px}.head p{margin:0;color:var(--muted);line-height:1.55}
+    .actions{display:flex;gap:8px;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;justify-content:center;padding:11px 14px;border-radius:12px;background:#15314a;color:#fff;text-decoration:none;font-weight:850;border:1px solid var(--line)}.btn.green{background:var(--green);border:0;color:#042116}
+    .note{padding:13px 15px;border:1px solid rgba(43,211,145,.28);border-radius:16px;background:rgba(43,211,145,.07);color:#cfeee2;line-height:1.55;font-size:13px}
+  </style>
+</head>
+<body data-jc-bg="modern-data">
+  <main class="wrap">
+    <section class="head">
+      <h1>🎵 Player de Música JC-APK TV</h1>
+      <p>Player separado do index para conferência e manutenção. Os áudios continuam no GitHub Releases; o Supabase, quando disponível, busca somente configuração leve.</p>
+    </section>
+    <section data-jc-music-player></section>
+    <div class="actions"><a class="btn" href="painel-links.html">Voltar para Atualizar Links</a><a class="btn green" href="geradores/index.html">Abrir gerador</a></div>
+    <div class="note"><strong>Regra:</strong> excluir/ocultar música nesta configuração remove apenas do player. Não apaga o arquivo do GitHub e não grava música no Supabase.</div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="dados/supabase-config.js"></script>
+  <script src="dados/common.js"></script>
+  <script src="dados/jc-musicas-github.js?v=20260705-PLAYER-LISTA"></script>
+  <script src="dados/jc-github-music-player.js?v=20260705-PLAYER-HTML-RESTAURADO"></script>
+</body>
+</html>

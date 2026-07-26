@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Configuração dos Aplicativos</title>
+  <link rel="stylesheet" href="dados/common.css">
+  <link rel="stylesheet" href="dados/jc-responsive-backgrounds.css?v=20260720-02">
+  <style>
+    :root{--bg:#061522;--card:#0a1b2a;--line:rgba(255,255,255,.12);--muted:#9eb2c3;--blue:#1c91ff;--green:#29d391;--red:#ff6578;--yellow:#f8bc45}
+    body{background:radial-gradient(circle at top right,rgba(28,145,255,.15),transparent 35%),var(--bg);color:#fff}
+    .wrap{width:min(1220px,calc(100% - 24px));margin:20px auto 50px}.head{display:flex;gap:14px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}.head h1,.head h2{margin:0 0 5px}.muted{color:var(--muted);line-height:1.5}.btn{border:1px solid var(--line);border-radius:11px;padding:10px 13px;background:rgba(255,255,255,.05);color:#fff;font-weight:850;cursor:pointer}.btn.primary{background:var(--blue);border-color:transparent}.btn.green{background:var(--green);color:#032015;border-color:transparent}.btn.red{background:rgba(255,101,120,.12);color:#ffd3da;border-color:rgba(255,101,120,.35)}.btn:disabled{opacity:.5;cursor:not-allowed}.notice{margin:15px 0;padding:14px;border:1px solid rgba(41,211,145,.3);border-radius:15px;background:rgba(41,211,145,.07);line-height:1.55}.notice.warn{border-color:rgba(248,188,69,.36);background:rgba(248,188,69,.08)}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}.tab.active{background:var(--blue)}.card{border:1px solid var(--line);border-radius:19px;background:rgba(10,27,42,.92);padding:18px;box-shadow:0 16px 46px rgba(0,0,0,.22)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.full{grid-column:1/-1}.field{display:grid;gap:6px}.field label{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:#bfd0dc;font-weight:900}.field input,.field textarea,.field select{width:100%;box-sizing:border-box;padding:11px 12px;border-radius:11px;border:1px solid var(--line);background:#061522;color:#fff;outline:none}.field textarea{min-height:92px;resize:vertical}.check{display:flex;gap:9px;align-items:flex-start;padding:11px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.025)}.check input{accent-color:var(--green);width:18px;height:18px;margin-top:2px}.actions{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;margin-top:15px}.status{min-height:21px;margin-top:10px;color:#bfe9ff}.section{margin-top:17px}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:15px;margin-top:12px}.table{width:100%;border-collapse:collapse;min-width:900px}.table th,.table td{padding:11px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;font-size:13px}.table th{background:rgba(0,0,0,.16);color:#bfd0dc}.badge{display:inline-flex;padding:5px 8px;border-radius:999px;font-size:10px;font-weight:900;border:1px solid rgba(41,211,145,.35);background:rgba(41,211,145,.08);color:#cffff0}.badge.off{border-color:rgba(255,101,120,.35);background:rgba(255,101,120,.08);color:#ffd4da}.modal{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;padding:12px;z-index:50}.modal.open{display:flex}.modal-box{width:min(760px,100%);max-height:94vh;overflow:auto;border:1px solid var(--line);border-radius:20px;background:#091a29;padding:18px}.modal-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:12px}.modal-head h3{margin:0}.hidden{display:none!important} code{color:#bfe9ff}@media(max-width:720px){.grid{grid-template-columns:1fr}.full{grid-column:auto}}
+  </style>
+</head>
+<body data-jc-bg="modern-data">
+<div class="wrap">
+  <div class="head">
+    <div><h1>Configuração dos Aplicativos</h1><div class="muted">Atualizações, bloqueio de versões antigas, links fixos e opções dos ativadores em um único lugar.</div></div>
+    <a class="btn" href="index.html">← Voltar ao início</a>
+  </div>
+
+  <div class="notice"><b>Sem trocar links ou códigos:</b> publique cada APK no GitHub Releases sempre com o mesmo nome e use o endereço <code>releases/latest/download/arquivo.apk</code>. O Supabase guarda apenas a configuração leve.</div>
+  <div class="notice warn"><b>Ordem segura:</b> publique e teste os APKs novos antes de ligar “Bloquear versões legadas”. Depois de ligado, os ativadores antigos deixam de reservar código ou consumir crédito.</div>
+
+  <div id="loginState" class="card">Verificando acesso administrativo...</div>
+  <main id="app" hidden>
+    <div class="tabs" id="tabs"></div>
+
+    <section class="card">
+      <div class="grid">
+        <div class="field"><label>Nome exibido</label><input id="display_name"></div>
+        <div class="field"><label>Pacote Android esperado</label><input id="expected_package_name"></div>
+        <div class="field"><label>VersionCode atual publicado</label><input id="latest_version_code" type="number" min="1"></div>
+        <div class="field"><label>VersionName mostrado</label><input id="latest_version_name" placeholder="5.1.3.1"></div>
+        <div class="field"><label>VersionCode mínimo permitido</label><input id="minimum_version_code" type="number" min="1"></div>
+        <div class="field"><label>Versões bloqueadas específicas</label><input id="blocked_version_codes" placeholder="Ex.: 5127, 5128, 5170"></div>
+        <div class="field full"><label>Link fixo do APK no GitHub</label><input id="apk_url" placeholder="https://github.com/.../releases/latest/download/arquivo.apk"></div>
+        <div class="field full"><label>SHA-256 do APK</label><input id="sha256" placeholder="64 caracteres; pode ficar vazio durante o primeiro teste"></div>
+        <div class="field full"><label>Mensagem da atualização/bloqueio</label><textarea id="message" placeholder="Esta versão foi desativada. Instale a versão atual para continuar."></textarea></div>
+        <div class="field full"><label>Novidades da versão</label><textarea id="release_notes" placeholder="Uma novidade por linha."></textarea></div>
+        <label class="check"><input id="force_update" type="checkbox"><span><b>Atualização forçada</b><br><span class="muted">Bloqueia qualquer versão abaixo da versão atual publicada.</span></span></label>
+        <label class="check"><input id="block_legacy" type="checkbox"><span><b>Bloquear versões anteriores ao novo sistema</b><br><span class="muted">Use nos ativadores somente depois de publicar e testar os APKs novos.</span></span></label>
+        <label class="check"><input id="active" type="checkbox"><span><b>Controle ativo</b><br><span class="muted">Desligue apenas para manutenção.</span></span></label>
+      </div>
+
+      <div id="activatorSettings" class="section">
+        <div class="head"><div><h2>Fluxo do ativador</h2><div class="muted">Padrões leves recebidos pelo aplicativo. Existe fallback interno se o Supabase estiver temporariamente indisponível.</div></div></div>
+        <div class="grid">
+          <div class="field"><label>Versão padrão TV / Box</label><input id="default_tv_version" placeholder="5.1.0.0"></div>
+          <div class="field"><label>Versão padrão celular Android 12+</label><input id="default_mobile_version" placeholder="5.3.1.0"></div>
+          <div class="field full"><label>Mensagem do aviso inicial</label><textarea id="warning_message"></textarea></div>
+          <div class="field full"><label>Mensagem da espera de 10 segundos</label><textarea id="countdown_message"></textarea></div>
+          <label class="check"><input id="allow_manual_version" type="checkbox"><span>Permitir escolha manual da versão</span></label>
+          <label class="check"><input id="mobile_extra_files_only" type="checkbox"><span>Arquivos extras somente em celular Android 12+</span></label>
+        </div>
+        <div class="section">
+          <div class="head"><div><h2>Modo teste de 3 dias</h2><div class="muted">O código de teste não reserva CONFIG, não consome crédito e instala somente o APK de demonstração.</div></div></div>
+          <div class="grid">
+            <div class="field"><label>Código de teste</label><input id="test_code" placeholder="00000000000"></div>
+            <div class="field"><label>Código de download</label><input id="test_download_code" placeholder="3754570"></div>
+            <div class="field"><label>Prazo informado do teste</label><input id="test_duration_days" type="number" value="3" readonly><small class="muted">O próprio APK de teste controla e encerra os 3 dias.</small></div>
+            <div class="field"><label>SHA-256 do APK de teste</label><input id="test_sha256" placeholder="Opcional"></div>
+            <div class="field full"><label>Link do APK de teste</label><input id="test_apk_url"></div>
+            <div class="field full"><label>Link do vídeo/tutorial</label><input id="test_tutorial_url"></div>
+            <div class="field full"><label>Mensagem de WhatsApp do teste</label><textarea id="test_message"></textarea></div>
+            <label class="check"><input id="test_mode_active" type="checkbox"><span><b>Modo teste ativo</b><br><span class="muted">Permite usar o código fixo de teste nos ativadores.</span></span></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions"><button class="btn" id="reloadBtn">Recarregar</button><button class="btn" id="restoreRecommendedBtn">Restaurar valores recomendados</button><button class="btn primary" id="saveBtn">Salvar configuração</button></div>
+      <div class="status" id="status"></div>
+    </section>
+
+    <section class="card section" id="uninstallSection">
+      <div class="head"><div><h2>Pacotes de desinstalação</h2><div class="muted">O 11-Ativador permanece sem desinstalação. No 16 e VIP, UniTV Free é obrigatório; os demais são opcionais.</div></div><button class="btn green" id="newUninstallBtn">+ Adicionar pacote</button></div>
+      <div class="table-wrap"><table class="table"><thead><tr><th>Ordem</th><th>Aplicativo</th><th>Pacote</th><th>Regra</th><th>Status</th><th>Ações</th></tr></thead><tbody id="uninstallBody"></tbody></table></div>
+    </section>
+
+    <section class="card section" id="extrasSection">
+      <div class="head"><div><h2>APKs extras do VIP</h2><div class="muted">Nenhum aplicativo fica fixo no código. Escolha no painel qual APK aparece, em qual aparelho e se a instalação é opcional.</div></div><button class="btn green" id="newExtraBtn">+ Adicionar APK extra</button></div>
+      <div class="table-wrap"><table class="table"><thead><tr><th>Ordem</th><th>Aplicativo</th><th>Pacote</th><th>Aparelhos</th><th>Android</th><th>Tipo</th><th>Status</th><th>Ações</th></tr></thead><tbody id="extrasBody"></tbody></table></div>
+    </section>
+
+    <section class="card section" id="riskSection">
+      <div class="head"><div><h2>Boxes de Risco</h2><div class="muted">Cadastre modelo, placa ou processador. O ROOT é detectado automaticamente. Uma regra só dispara quando alcança a quantidade de sinais configurada.</div></div><button class="btn green" id="newRiskBtn">+ Adicionar regra</button></div>
+      <div class="notice warn"><b>Regra inicial:</b> somente IK316 está como risco confirmado. Os outros modelos continuam seguindo normalmente até existir relato real pelo código.</div>
+      <div class="table-wrap"><table class="table"><thead><tr><th>Ordem</th><th>Regra</th><th>Modelos</th><th>Processador/placa</th><th>Nível</th><th>Status</th><th>Ações</th></tr></thead><tbody id="riskBody"></tbody></table></div>
+    </section>
+  </main>
+</div>
+
+<div class="modal" id="uninstallModal"><div class="modal-box">
+  <div class="modal-head"><h3 id="uninstallTitle">Pacote de desinstalação</h3><button class="btn" id="closeUninstall">Fechar</button></div>
+  <input id="uninstall_id" type="hidden">
+  <div class="grid">
+    <div class="field"><label>Nome</label><input id="uninstall_name"></div>
+    <div class="field"><label>Pacote Android</label><input id="uninstall_package_name"></div>
+    <div class="field"><label>Ordem</label><input id="uninstall_sort_order" type="number" value="10"></div>
+    <label class="check"><input id="uninstall_required" type="checkbox"><span>Desinstalação obrigatória</span></label>
+    <label class="check"><input id="uninstall_active" type="checkbox" checked><span>Ativo</span></label>
+  </div>
+  <div class="actions"><button class="btn primary" id="saveUninstallBtn">Salvar pacote</button></div>
+  <div class="status" id="uninstallStatus"></div>
+</div></div>
+
+<div class="modal" id="extraModal"><div class="modal-box">
+  <div class="modal-head"><h3 id="extraTitle">APK extra</h3><button class="btn" id="closeExtra">Fechar</button></div>
+  <input id="extra_id" type="hidden">
+  <div class="grid">
+    <div class="field"><label>Nome</label><input id="extra_name"></div>
+    <div class="field"><label>Pacote Android</label><input id="extra_package_name"></div>
+    <div class="field full"><label>Descrição</label><textarea id="extra_description"></textarea></div>
+    <div class="field full"><label>Link fixo do APK</label><input id="extra_apk_url"></div>
+    <div class="field full"><label>SHA-256</label><input id="extra_sha256"></div>
+    <div class="field full"><label>URL do ícone (opcional)</label><input id="extra_icon_url"></div>
+    <div class="field"><label>Mostrar em</label><select id="extra_device_scope"><option value="all">Todos</option><option value="mobile_android12">Somente celular Android 12+</option><option value="mobile">Celular</option><option value="tv_box">TV / Box</option></select></div>
+    <div class="field"><label>Ordem</label><input id="extra_sort_order" type="number" value="10"></div>
+    <div class="field"><label>SDK mínimo</label><input id="extra_min_sdk" type="number" min="21" value="21"></div>
+    <div class="field"><label>SDK máximo (vazio = sem limite)</label><input id="extra_max_sdk" type="number" min="21"></div>
+    <label class="check"><input id="extra_required" type="checkbox"><span>Instalação obrigatória</span></label>
+    <label class="check"><input id="extra_active" type="checkbox" checked><span>Ativo</span></label>
+  </div>
+  <div class="actions"><button class="btn primary" id="saveExtraBtn">Salvar APK extra</button></div>
+  <div class="status" id="extraStatus"></div>
+</div></div>
+
+<div class="modal" id="riskModal"><div class="modal-box">
+  <div class="modal-head"><h3 id="riskTitle">Box de Risco</h3><button class="btn" id="closeRisk">Fechar</button></div>
+  <input id="risk_id" type="hidden">
+  <div class="grid">
+    <div class="field"><label>Nome da regra</label><input id="risk_name"></div>
+    <div class="field"><label>Ordem</label><input id="risk_sort_order" type="number" value="10"></div>
+    <div class="field full"><label>Ativadores</label><input id="risk_app_keys" placeholder="activator_11, activator_16, activator_vip"></div>
+    <div class="field full"><label>Modelos</label><input id="risk_models" placeholder="IK316"></div>
+    <div class="field full"><label>Fabricantes opcionais</label><input id="risk_manufacturers"></div>
+    <div class="field full"><label>Processadores / SoCs</label><input id="risk_processors" placeholder="H616, H313"></div>
+    <div class="field full"><label>Hardware / board / identificadores</label><input id="risk_hardware_ids" placeholder="IK316, sun50iw9"></div>
+    <div class="field full"><label>Versões do UniTV bloqueadas</label><input id="risk_blocked_versions" placeholder="5.7.2.0"></div>
+    <div class="field"><label>Versão segura recomendada</label><input id="risk_safe_version" value="5.1.0.0"></div>
+    <div class="field"><label>Contagem regressiva</label><input id="risk_countdown" type="number" min="0" max="300" value="60"></div>
+    <div class="field"><label>Nível</label><select id="risk_severity"><option value="info">Informação</option><option value="warning">Aviso</option><option value="confirmed">Risco confirmado</option></select></div>
+    <div class="field full"><label>Mensagem</label><textarea id="risk_message"></textarea></div>
+    <label class="check"><input id="risk_two_signals" type="checkbox" checked><span>Exigir pelo menos 2 sinais: modelo, hardware/processador e ROOT</span></label>
+    <label class="check"><input id="risk_allow_continue" type="checkbox" checked><span>Permitir continuar assumindo os riscos após a contagem</span></label>
+    <label class="check"><input id="risk_active" type="checkbox" checked><span>Regra ativa</span></label>
+  </div>
+  <div class="actions"><button class="btn primary" id="saveRiskBtn">Salvar regra</button></div><div class="status" id="riskStatus"></div>
+</div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="dados/supabase-config.js"></script>
+<script src="dados/common.js"></script>
+<script>
+(function(){
+'use strict';
+const A=window.JC_APP,$=id=>document.getElementById(id);
+const apps=[
+ {key:'activator_11',label:'11-Ativador',activator:true},
+ {key:'activator_16',label:'16-Ativador',activator:true},
+ {key:'activator_vip',label:'VIP-Ativador',activator:true},
+ {key:'launcher_lite',label:'Launcher Lite',activator:false},
+ {key:'unitv_cleaner',label:'Limpador UniTVFree',activator:false}
+];
+let selected='activator_11',releases=[],extras=[],uninstalls=[],risks=[];
+const TEST_APK='https://github.com/JoaoJMuniz19/JC-APK-TV-Downloads/releases/download/downloads-oficiais/UniTV.Utilizado.pra.TESTE.apk';
+const DOWNLOAD_BASE='https://github.com/JoaoJMuniz19/JC-APK-TV-Downloads/releases/download/downloads-oficiais/';
+const TEST_MESSAGE=`Olá! 👋
+
+Seu teste da *JC APK TV* foi preparado com sucesso.
+
+🧪 *TESTE GRÁTIS POR 3 DIAS*
+
+O teste está disponível somente para aparelhos que ainda não utilizaram o aplicativo UniTV Mensal. Caso o aplicativo já tenha sido utilizado anteriormente, será necessário adquirir uma licença de ativação permanente, sem mensalidades.
+
+📦 *Produto:* Ativador {{TIPO_ATIVADOR}} Dígitos — Demonstração
+
+📺 *Aparelho 1*
+• *Versão:* Tradicional
+• *Código de download — Opção 1:* \`{{CODIGO_DOWNLOAD}}\`
+
+🔗 *Link direto para instalação:*
+{{LINK_APK_TESTE}}
+
+▶️ *Tutorial de como utilizar:*
+{{LINK_VIDEO_TUTORIAL}}
+
+⏱️ *Duração do teste*
+
+O próprio APK de demonstração controla automaticamente os {{DURACAO_DIAS}} dias. O teste não funcionará em aparelhos que já tenham utilizado o aplicativo UniTV Mensal.
+
+⚠️ *IMPORTANTE — TESTE GRATUITO*
+
+Não oferecemos suporte para instalação durante o período de teste gratuito. Siga corretamente o tutorial enviado acima.
+
+O suporte para instalação é disponibilizado somente após a compra do código de ativação.`;
+const RECOMMENDED={
+ activator_11:{app_key:'activator_11',display_name:'11-Ativador',expected_package_name:'com.jcapktv.ativador11',latest_version_code:5150,latest_version_name:'5.1.5.0',minimum_version_code:1,apk_url:DOWNLOAD_BASE+'11-Ativador.apk',release_notes:'Modo teste corrigido e fluxo próprio do 11 preservado.',test_code:'00000000000'},
+ activator_16:{app_key:'activator_16',display_name:'16-Ativador',expected_package_name:'com.jcapktv.ativador16',latest_version_code:5200,latest_version_name:'5.1.5.0',minimum_version_code:1,apk_url:DOWNLOAD_BASE+'16-Ativador.apk',release_notes:'Modo teste corrigido, limpeza e desinstalação preservadas.',test_code:'0000000000000000'},
+ activator_vip:{app_key:'activator_vip',display_name:'VIP-Ativador',expected_package_name:'com.jcapktv.ativadorvip',latest_version_code:5201,latest_version_name:'5.1.5.1',minimum_version_code:1,apk_url:DOWNLOAD_BASE+'VIP-Ativador.apk',release_notes:'Modo teste corrigido e compatibilidade Android 12+ preservada.',test_code:'0000000000000000'},
+ launcher_lite:{app_key:'launcher_lite',display_name:'Launcher Lite',expected_package_name:'com.jcapktv.launcher.lite',latest_version_code:1,latest_version_name:'1.0.0',minimum_version_code:1,apk_url:DOWNLOAD_BASE+'Launcher-Lite.apk'},
+ unitv_cleaner:{app_key:'unitv_cleaner',display_name:'Limpador UniTVFree',expected_package_name:'com.jcapktv.limpador',latest_version_code:1,latest_version_name:'1.0.0',minimum_version_code:1,apk_url:DOWNLOAD_BASE+'Limpador-UniTVFree.apk'}
+};
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const appInfo=()=>apps.find(x=>x.key===selected)||apps[0];
+function setStatus(text,error=false){$('status').textContent=text;$('status').style.color=error?'#ffb4be':'#bfe9ff'}
+function parseCodes(value){return [...new Set(String(value||'').split(/[\s,;]+/).map(v=>Number(v)).filter(v=>Number.isInteger(v)&&v>0))].sort((a,b)=>a-b)}
+function renderTabs(){$('tabs').innerHTML=apps.map(x=>`<button class="btn tab ${x.key===selected?'active':''}" data-key="${x.key}">${esc(x.label)}</button>`).join('');$('tabs').querySelectorAll('[data-key]').forEach(b=>b.onclick=()=>{selected=b.dataset.key;renderTabs();fillForm();renderUninstalls();toggleSections();});}
+function recommendedRow(key=selected){return {app_key:key,display_name:apps.find(x=>x.key===key)?.label||key,expected_package_name:'',latest_version_code:1,latest_version_name:'1.0.0',minimum_version_code:1,force_update:false,block_legacy:false,blocked_version_codes:[],apk_url:'',sha256:'',message:'',release_notes:'',default_tv_version:'5.1.0.0',default_mobile_version:'5.3.1.0',allow_manual_version:true,mobile_extra_files_only:true,warning_message:'',countdown_message:'',test_mode_active:['activator_11','activator_16','activator_vip'].includes(key),test_code:key==='activator_11'?'00000000000':'0000000000000000',test_download_code:'3754570',test_apk_url:TEST_APK,test_sha256:'',test_duration_days:3,test_message:TEST_MESSAGE,test_tutorial_url:'',active:true,...(RECOMMENDED[key]||{})}}
+function row(){return {...recommendedRow(selected),...(releases.find(x=>x.app_key===selected)||{})}}
+function fillForm(){const r=row();['display_name','expected_package_name','latest_version_code','latest_version_name','minimum_version_code','apk_url','sha256','message','release_notes','default_tv_version','default_mobile_version','warning_message','countdown_message','test_code','test_download_code','test_apk_url','test_sha256','test_duration_days','test_message','test_tutorial_url'].forEach(k=>$(k).value=r[k]??'');$('blocked_version_codes').value=(r.blocked_version_codes||[]).join(', ');$('force_update').checked=!!r.force_update;$('block_legacy').checked=!!r.block_legacy;$('allow_manual_version').checked=r.allow_manual_version!==false;$('mobile_extra_files_only').checked=r.mobile_extra_files_only!==false;$('test_mode_active').checked=!!r.test_mode_active;$('active').checked=r.active!==false;setStatus(`Editando ${r.display_name||selected}.`)}
+function toggleSections(){const info=appInfo();$('activatorSettings').classList.toggle('hidden',!info.activator);$('uninstallSection').classList.toggle('hidden',!['activator_16','activator_vip'].includes(selected));$('extrasSection').classList.toggle('hidden',selected!=='activator_vip');}
+async function safeRows(table,orders=[]){let q=A.client.from(table).select('*');for(const field of orders)q=q.order(field);const result=await q;if(result.error){console.warn('Falha ao carregar '+table,result.error);return {rows:[],error:result.error}}return {rows:result.data||[],error:null}}
+async function load(){setStatus('Carregando configurações...');const results=await Promise.all([safeRows('jc_app_releases',['display_name']),safeRows('jc_vip_extra_apps',['sort_order','name']),safeRows('jc_app_uninstall_packages',['sort_order','name']),safeRows('jc_device_risk_rules',['sort_order','name'])]);releases=results[0].rows;extras=results[1].rows;uninstalls=results[2].rows;risks=results[3].rows;renderTabs();fillForm();renderExtras();renderUninstalls();renderRisks();toggleSections();const failures=results.filter(x=>x.error);if(failures.length)setStatus('A tela foi preenchida com valores seguros. Execute o SQL do pacote para criar/atualizar as tabelas.',true);else setStatus(`Configurações carregadas. Editando ${row().display_name||selected}.`);}
+function restoreRecommended(){const current=releases.find(x=>x.app_key===selected);const restored={...recommendedRow(selected),sha256:current?.sha256||'',test_sha256:current?.test_sha256||'',force_update:false,block_legacy:false,blocked_version_codes:[]};releases=[...releases.filter(x=>x.app_key!==selected),restored];fillForm();setStatus('Valores recomendados restaurados no formulário. Clique em Salvar configuração para aplicar.');A.toast('Valores recomendados preenchidos.');}
+async function save(){const latest=Number($('latest_version_code').value||0),minimum=Number($('minimum_version_code').value||0);if(latest<1||minimum<1)throw new Error('VersionCode precisa ser maior que zero.');if(minimum>latest)throw new Error('A versão mínima não pode ser maior que a versão atual.');const payload={app_key:selected,display_name:$('display_name').value.trim(),expected_package_name:$('expected_package_name').value.trim(),latest_version_code:latest,latest_version_name:$('latest_version_name').value.trim(),minimum_version_code:minimum,blocked_version_codes:parseCodes($('blocked_version_codes').value),force_update:$('force_update').checked,block_legacy:$('block_legacy').checked,apk_url:$('apk_url').value.trim(),sha256:$('sha256').value.trim().toLowerCase(),message:$('message').value.trim(),release_notes:$('release_notes').value.trim(),default_tv_version:$('default_tv_version').value.trim()||'5.1.0.0',default_mobile_version:$('default_mobile_version').value.trim()||'5.3.1.0',allow_manual_version:$('allow_manual_version').checked,mobile_extra_files_only:$('mobile_extra_files_only').checked,warning_message:$('warning_message').value.trim(),countdown_message:$('countdown_message').value.trim(),test_mode_active:$('test_mode_active').checked,test_code:$('test_code').value.replace(/\D/g,''),test_download_code:$('test_download_code').value.replace(/\D/g,''),test_apk_url:$('test_apk_url').value.trim(),test_sha256:$('test_sha256').value.trim().toLowerCase(),test_duration_days:3,test_message:$('test_message').value.trim(),test_tutorial_url:$('test_tutorial_url').value.trim(),active:$('active').checked};if(!payload.display_name||!payload.latest_version_name)throw new Error('Preencha nome e versão.');if(payload.sha256&&!/^[a-f0-9]{64}$/.test(payload.sha256))throw new Error('SHA-256 deve ter 64 caracteres hexadecimais.');if(payload.test_sha256&&!/^[a-f0-9]{64}$/.test(payload.test_sha256))throw new Error('SHA-256 do teste inválido.');if(appInfo().activator&&payload.test_mode_active&&payload.test_code.length!==(selected==='activator_11'?11:16))throw new Error('O código de teste precisa respeitar a quantidade de dígitos do ativador.');$('saveBtn').disabled=true;setStatus('Salvando...');const {error}=await A.client.from('jc_app_releases').upsert(payload,{onConflict:'app_key'});$('saveBtn').disabled=false;if(error)throw error;await load();A.toast('Configuração salva.');setStatus('Configuração salva com sucesso.');}
+function scopeLabel(v){return {all:'Todos',mobile_android12:'Celular Android 12+',mobile:'Celular',tv_box:'TV / Box'}[v]||v}
+function renderUninstalls(){const body=$('uninstallBody'),rows=uninstalls.filter(x=>x.app_key===selected);if(!rows.length){body.innerHTML='<tr><td colspan="6" class="muted" style="text-align:center;padding:24px">Nenhum pacote cadastrado para este aplicativo.</td></tr>';return}body.innerHTML=rows.map(x=>`<tr><td>${Number(x.sort_order||0)}</td><td><b>${esc(x.name)}</b></td><td><code>${esc(x.package_name)}</code></td><td>${x.required?'<b style="color:#ffd37a">OBRIGATÓRIA</b>':'Opcional'}</td><td><span class="badge ${x.active?'':'off'}">${x.active?'ATIVO':'OCULTO'}</span></td><td><button class="btn" data-uedit="${x.id}">Editar</button> <button class="btn red" data-udel="${x.id}">Excluir</button></td></tr>`).join('');body.querySelectorAll('[data-uedit]').forEach(b=>b.onclick=()=>openUninstall(rows.find(x=>x.id===b.dataset.uedit)));body.querySelectorAll('[data-udel]').forEach(b=>b.onclick=()=>removeUninstall(b.dataset.udel));}
+function openUninstall(x=null){$('uninstall_id').value=x?.id||'';$('uninstallTitle').textContent=x?'Editar pacote':'Novo pacote';$('uninstall_name').value=x?.name||'';$('uninstall_package_name').value=x?.package_name||'';$('uninstall_sort_order').value=x?.sort_order??10;$('uninstall_required').checked=!!x?.required;$('uninstall_active').checked=x?.active!==false;$('uninstallStatus').textContent='';$('uninstallModal').classList.add('open');}
+function closeUninstall(){$('uninstallModal').classList.remove('open')}
+async function saveUninstall(){const id=$('uninstall_id').value;const payload={app_key:selected,name:$('uninstall_name').value.trim(),package_name:$('uninstall_package_name').value.trim(),sort_order:Number($('uninstall_sort_order').value||10),required:$('uninstall_required').checked,active:$('uninstall_active').checked};if(!payload.name||!payload.package_name)throw new Error('Preencha nome e pacote.');$('saveUninstallBtn').disabled=true;let q=id?A.client.from('jc_app_uninstall_packages').update(payload).eq('id',id):A.client.from('jc_app_uninstall_packages').insert(payload);const {error}=await q;$('saveUninstallBtn').disabled=false;if(error)throw error;closeUninstall();await load();A.toast('Pacote salvo.');}
+async function removeUninstall(id){if(!confirm('Excluir este pacote da lista?'))return;const {error}=await A.client.from('jc_app_uninstall_packages').delete().eq('id',id);if(error)throw error;await load();A.toast('Pacote excluído.');}
+function renderExtras(){const body=$('extrasBody');if(!extras.length){body.innerHTML='<tr><td colspan="8" class="muted" style="text-align:center;padding:24px">Nenhum APK extra cadastrado.</td></tr>';return}body.innerHTML=extras.map(x=>`<tr><td>${Number(x.sort_order||0)}</td><td><b>${esc(x.name)}</b><br><span class="muted">${esc(x.description||'')}</span></td><td><code>${esc(x.package_name||'—')}</code></td><td>${esc(scopeLabel(x.device_scope))}</td><td>SDK ${x.min_sdk}${x.max_sdk?'–'+x.max_sdk:'+'}</td><td>${x.required?'Obrigatório':'Opcional'}</td><td><span class="badge ${x.active?'':'off'}">${x.active?'ATIVO':'OCULTO'}</span></td><td><button class="btn" data-edit="${x.id}">Editar</button> <button class="btn red" data-del="${x.id}">Excluir</button></td></tr>`).join('');body.querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>openExtra(extras.find(x=>x.id===b.dataset.edit)));body.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>removeExtra(b.dataset.del));}
+function openExtra(x=null){$('extra_id').value=x?.id||'';$('extraTitle').textContent=x?'Editar APK extra':'Novo APK extra';$('extra_name').value=x?.name||'';$('extra_package_name').value=x?.package_name||'';$('extra_description').value=x?.description||'';$('extra_apk_url').value=x?.apk_url||'';$('extra_sha256').value=x?.sha256||'';$('extra_icon_url').value=x?.icon_url||'';$('extra_device_scope').value=x?.device_scope||'all';$('extra_sort_order').value=x?.sort_order??10;$('extra_min_sdk').value=x?.min_sdk??21;$('extra_max_sdk').value=x?.max_sdk??'';$('extra_required').checked=!!x?.required;$('extra_active').checked=x?.active!==false;$('extraStatus').textContent='';$('extraModal').classList.add('open');}
+function closeExtra(){$('extraModal').classList.remove('open')}
+async function saveExtra(){const id=$('extra_id').value;const payload={name:$('extra_name').value.trim(),description:$('extra_description').value.trim(),package_name:$('extra_package_name').value.trim(),apk_url:$('extra_apk_url').value.trim(),sha256:$('extra_sha256').value.trim().toLowerCase(),icon_url:$('extra_icon_url').value.trim(),device_scope:$('extra_device_scope').value,min_sdk:Number($('extra_min_sdk').value||21),max_sdk:$('extra_max_sdk').value?Number($('extra_max_sdk').value):null,required:$('extra_required').checked,active:$('extra_active').checked,sort_order:Number($('extra_sort_order').value||10)};if(!payload.name||!payload.apk_url)throw new Error('Preencha nome e link do APK.');if(payload.sha256&&!/^[a-f0-9]{64}$/.test(payload.sha256))throw new Error('SHA-256 inválido.');$('saveExtraBtn').disabled=true;let q=id?A.client.from('jc_vip_extra_apps').update(payload).eq('id',id):A.client.from('jc_vip_extra_apps').insert(payload);const {error}=await q;$('saveExtraBtn').disabled=false;if(error)throw error;closeExtra();await load();A.toast('APK extra salvo.');}
+async function removeExtra(id){if(!confirm('Excluir este APK extra do VIP?'))return;const {error}=await A.client.from('jc_vip_extra_apps').delete().eq('id',id);if(error)throw error;await load();A.toast('APK extra excluído.');}
+
+function csv(v){return [...new Set(String(v||'').split(/[,;\n]+/).map(x=>x.trim()).filter(Boolean))]}
+function renderRisks(){const body=$('riskBody');if(!body)return;if(!risks.length){body.innerHTML='<tr><td colspan="7" class="muted" style="text-align:center;padding:24px">Nenhuma regra cadastrada.</td></tr>';return}body.innerHTML=risks.map(x=>`<tr><td>${Number(x.sort_order||0)}</td><td><b>${esc(x.name)}</b><br><span class="muted">${esc((x.app_keys||[]).join(', '))}</span></td><td>${esc((x.models||[]).join(', ')||'—')}</td><td>${esc([...(x.processors||[]),...(x.hardware_ids||[])].join(', ')||'—')}</td><td>${esc(x.severity||'warning')}<br><span class="muted">${x.require_two_signals?'2 sinais':'1 sinal'}</span></td><td><span class="badge ${x.active?'':'off'}">${x.active?'ATIVA':'DESATIVADA'}</span></td><td><button class="btn" data-redit="${x.id}">Editar</button> <button class="btn red" data-rdel="${x.id}">Excluir</button></td></tr>`).join('');body.querySelectorAll('[data-redit]').forEach(b=>b.onclick=()=>openRisk(risks.find(x=>x.id===b.dataset.redit)));body.querySelectorAll('[data-rdel]').forEach(b=>b.onclick=()=>removeRisk(b.dataset.rdel));}
+function openRisk(x=null){$('risk_id').value=x?.id||'';$('riskTitle').textContent=x?'Editar Box de Risco':'Nova Box de Risco';$('risk_name').value=x?.name||'';$('risk_sort_order').value=x?.sort_order??10;$('risk_app_keys').value=(x?.app_keys||['activator_11','activator_16','activator_vip']).join(', ');$('risk_models').value=(x?.models||[]).join(', ');$('risk_manufacturers').value=(x?.manufacturers||[]).join(', ');$('risk_processors').value=(x?.processors||[]).join(', ');$('risk_hardware_ids').value=(x?.hardware_ids||[]).join(', ');$('risk_blocked_versions').value=(x?.blocked_unitv_versions||[]).join(', ');$('risk_safe_version').value=x?.safe_unitv_version||'5.1.0.0';$('risk_countdown').value=x?.countdown_seconds??60;$('risk_severity').value=x?.severity||'warning';$('risk_message').value=x?.message||'';$('risk_two_signals').checked=x?.require_two_signals!==false;$('risk_allow_continue').checked=x?.allow_continue!==false;$('risk_active').checked=x?.active!==false;$('riskStatus').textContent='';$('riskModal').classList.add('open');}
+function closeRisk(){$('riskModal').classList.remove('open')}
+async function saveRisk(){const id=$('risk_id').value;const payload={name:$('risk_name').value.trim(),sort_order:Number($('risk_sort_order').value||10),app_keys:csv($('risk_app_keys').value),models:csv($('risk_models').value),manufacturers:csv($('risk_manufacturers').value),processors:csv($('risk_processors').value),hardware_ids:csv($('risk_hardware_ids').value),blocked_unitv_versions:csv($('risk_blocked_versions').value),safe_unitv_version:$('risk_safe_version').value.trim()||'5.1.0.0',countdown_seconds:Number($('risk_countdown').value||60),severity:$('risk_severity').value,message:$('risk_message').value.trim(),require_two_signals:$('risk_two_signals').checked,allow_continue:$('risk_allow_continue').checked,active:$('risk_active').checked};if(!payload.name)throw new Error('Informe o nome da regra.');if(!payload.models.length&&!payload.processors.length&&!payload.hardware_ids.length)throw new Error('Informe pelo menos um modelo, processador ou identificador de hardware.');$('saveRiskBtn').disabled=true;const q=id?A.client.from('jc_device_risk_rules').update(payload).eq('id',id):A.client.from('jc_device_risk_rules').insert(payload);const {error}=await q;$('saveRiskBtn').disabled=false;if(error)throw error;closeRisk();await load();A.toast('Regra de risco salva.');}
+async function removeRisk(id){if(!confirm('Excluir esta regra de risco?'))return;const {error}=await A.client.from('jc_device_risk_rules').delete().eq('id',id);if(error)throw error;await load();A.toast('Regra excluída.');}
+async function init(){try{const access=await A.requireAdmin();if(!access){$('loginState').innerHTML='Acesso administrativo necessário. <a href="index.html">Voltar e entrar no painel</a>';return}$('loginState').hidden=true;$('app').hidden=false;await load();}catch(e){$('loginState').textContent='Falha ao abrir: '+(e.message||e)}}
+$('restoreRecommendedBtn').onclick=restoreRecommended;$('saveBtn').onclick=()=>save().catch(e=>{setStatus(e.message||String(e),true);$('saveBtn').disabled=false});$('reloadBtn').onclick=()=>load().catch(e=>setStatus(e.message||String(e),true));$('newUninstallBtn').onclick=()=>openUninstall();$('closeUninstall').onclick=closeUninstall;$('uninstallModal').onclick=e=>{if(e.target===$('uninstallModal'))closeUninstall()};$('saveUninstallBtn').onclick=()=>saveUninstall().catch(e=>{$('uninstallStatus').textContent=e.message||String(e);$('uninstallStatus').style.color='#ffb4be';$('saveUninstallBtn').disabled=false});$('newExtraBtn').onclick=()=>openExtra();$('closeExtra').onclick=closeExtra;$('extraModal').onclick=e=>{if(e.target===$('extraModal'))closeExtra()};$('saveExtraBtn').onclick=()=>saveExtra().catch(e=>{$('extraStatus').textContent=e.message||String(e);$('extraStatus').style.color='#ffb4be';$('saveExtraBtn').disabled=false});$('newRiskBtn').onclick=()=>openRisk();$('closeRisk').onclick=closeRisk;$('riskModal').onclick=e=>{if(e.target===$('riskModal'))closeRisk()};$('saveRiskBtn').onclick=()=>saveRisk().catch(e=>{$('riskStatus').textContent=e.message||String(e);$('riskStatus').style.color='#ffb4be';$('saveRiskBtn').disabled=false});init();
+})();
+</script>
+</body>
+</html>

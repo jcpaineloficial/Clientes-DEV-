@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Gerenciador de Imagens | JC-APK TV</title>
+  <link rel="stylesheet" href="dados/common.css">
+  <link rel="stylesheet" href="dados/jc-responsive-backgrounds.css?v=20260720-02">
+  <style>
+    body{margin:0;min-height:100vh;background:radial-gradient(circle at top left,#0a3158,transparent 36%),#030b14;color:#eef8ff;font-family:Inter,system-ui,sans-serif}.wrap{width:min(1180px,100%);margin:auto;padding:18px}.top,.panel{border:1px solid rgba(128,191,238,.2);background:rgba(7,25,40,.92);box-shadow:0 18px 55px rgba(0,0,0,.34)}.top{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:18px;border-radius:20px}.top h1{margin:0}.top p{margin:6px 0 0;color:#9eb4c5}.back,.btn{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:9px 13px;border:1px solid rgba(118,185,232,.28);border-radius:11px;background:#0d2c46;color:#fff;text-decoration:none;font-weight:850;cursor:pointer}.panel{margin-top:14px;padding:17px;border-radius:20px}.notice{padding:13px;border:1px solid rgba(255,195,79,.3);border-radius:13px;background:rgba(255,195,79,.08);color:#ffe5aa;line-height:1.55}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:15px}.card{padding:13px;border:1px solid rgba(124,188,233,.2);border-radius:16px;background:#081b2b}.preview{height:150px;display:grid;place-items:center;overflow:hidden;border-radius:12px;background:#020a11}.preview img{width:100%;height:100%;object-fit:contain}.card h3{margin:11px 0 4px;font-size:14px}.path{color:#8eb2ca;font-size:10px;overflow-wrap:anywhere}.actions{display:flex;gap:7px;margin-top:10px}.file{display:none}.selected{margin-top:7px;color:#76e9b5;font-size:11px}.btn.green{background:#18c981;color:#032116;border-color:transparent}.btn:disabled{opacity:.45;cursor:not-allowed}@media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.wrap{padding:9px}.top{align-items:flex-start;flex-direction:column}.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body data-jc-bg="modern-data">
+  <main class="wrap">
+    <header class="top"><div><h1>🖼️ Gerenciador de Imagens</h1><p>Visualize e prepare imagens com o nome correto para substituir no GitHub.</p></div><a class="back" href="index.html">← Voltar ao painel</a></header>
+    <section class="panel">
+      <div class="notice"><b>Imagens fora do Supabase:</b> escolha uma imagem, confira a prévia e clique em “Baixar com nome correto”. Depois envie o arquivo baixado para o caminho indicado no GitHub. Nenhum código, crédito ou configuração será alterado.</div>
+      <div class="grid" id="imageGrid"></div>
+    </section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="dados/supabase-config.js"></script>
+  <script src="dados/common.js"></script>
+  <script>
+  (async function(){
+    const A=window.JC_APP;
+    if(!A?.client||!await A.requireAdmin()){location.replace('index.html');return;}
+    const files=[
+      ['Imagem principal do painel','assets/geradores/imagem-6d8b95c0415bdf49.webp'],
+      ['Fundo da área do usuário','assets/geradores/imagem-5820bcc4f86a8d7a.webp'],
+      ['Imagem do painel 01','assets/geradores/imagem-c67fc46cb78dc48c.webp'],
+      ['Imagem do painel 02','assets/geradores/imagem-7a128e8951593b79.webp'],
+      ['Imagem do painel 03','assets/geradores/imagem-9bd239c81f2af810.webp'],
+      ['Imagem do painel 04','assets/geradores/imagem-b7205e738130568d.webp'],
+      ['Imagem do painel 05','assets/geradores/imagem-134135a253b43d24.webp'],
+      ['Imagem do painel 06','assets/geradores/imagem-a3feb18d5611da07.webp'],
+      ['Imagem do painel 07','assets/geradores/imagem-542a1357b4ea8494.webp'],
+      ['Imagem do painel 08','assets/geradores/imagem-c8b335b96f9d77fd.webp'],
+      ['Imagem do painel 09','assets/geradores/imagem-76a4fb51f827255c.webp'],
+      ['Imagem do painel 10','assets/geradores/imagem-c5578e159020ea22.webp'],
+      ['Imagem do painel 11','assets/geradores/imagem-1ba16ad827a832fa.webp'],
+      ['Imagem PNG do painel','assets/geradores/imagem-0bddbac7d97866c4.png'],
+      ['Símbolo vetorial do painel','assets/geradores/imagem-3ab24fe09759a6af.svg'],
+      ['Fundo dos Ativadores 11 e 16','assets/jc-ativadores-11-16-background-otimizado.webp'],
+      ['Imagem Limpeza UniTV sem formatar','assets/limpeza-unitv-s-formatar-otimizado.webp']
+    ];
+    const grid=document.getElementById('imageGrid');
+    files.forEach(([name,path],index)=>{
+      const card=document.createElement('article');card.className='card';
+      card.innerHTML=`<div class="preview"><img loading="lazy" decoding="async" src="${path}" alt="${name}"></div><h3>${name}</h3><div class="path">${path}</div><div class="actions"><label class="btn" for="file-${index}">Escolher imagem</label><input class="file" id="file-${index}" type="file" accept="image/*"><button class="btn green" disabled>Baixar com nome correto</button></div><div class="selected">Imagem atual</div>`;
+      const input=card.querySelector('input'),img=card.querySelector('img'),button=card.querySelector('button'),status=card.querySelector('.selected');let objectUrl='';
+      input.onchange=()=>{const file=input.files?.[0];if(!file)return;if(objectUrl)URL.revokeObjectURL(objectUrl);objectUrl=URL.createObjectURL(file);img.src=objectUrl;status.textContent=file.name;button.disabled=false;button.onclick=async()=>{const target=path.split('/').pop(),ext=target.split('.').pop().toLowerCase();if(ext==='svg'){if(file.type!=='image/svg+xml'){alert('Para este item, escolha uma imagem SVG.');return;}const a=document.createElement('a');a.href=objectUrl;a.download=target;a.click();return;}const source=new Image();source.src=objectUrl;await source.decode();const canvas=document.createElement('canvas');canvas.width=source.naturalWidth;canvas.height=source.naturalHeight;canvas.getContext('2d').drawImage(source,0,0);const mime=ext==='png'?'image/png':'image/webp';const blob=await new Promise(resolve=>canvas.toBlob(resolve,mime,.92));if(!blob){alert('Não foi possível preparar a imagem.');return;}const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=target;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};};
+      grid.appendChild(card);
+    });
+  })().catch(()=>location.replace('index.html'));
+  </script>
+</body>
+</html>

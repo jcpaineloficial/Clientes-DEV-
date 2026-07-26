@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#071118">
+<title>Testar conexão | JC-APK TV</title>
+<style>
+*{box-sizing:border-box}html{background:#071118}body{margin:0;min-height:100vh;padding:20px;display:grid;place-items:center;color:#fff;font-family:Arial,sans-serif;position:relative;isolation:isolate}body:before{content:"";position:fixed;inset:0;z-index:-2;background:url("assets/jc-apk-background.webp") center/cover no-repeat;filter:brightness(.35) saturate(1.08)}body:after{content:"";position:fixed;inset:0;z-index:-1;background:linear-gradient(120deg,rgba(2,8,14,.94),rgba(5,19,30,.78))}.box{width:min(620px,100%);padding:24px;border:1px solid rgba(255,255,255,.15);border-radius:24px;background:linear-gradient(145deg,rgba(15,31,40,.94),rgba(6,18,25,.9));box-shadow:0 30px 95px rgba(0,0,0,.55);backdrop-filter:blur(15px)}.brand{display:inline-flex;padding:7px 11px;border-radius:999px;background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.25);color:#6dffa4;font-weight:900;letter-spacing:.06em}h1{margin:12px 0 8px;font-size:clamp(28px,5vw,38px)}p{color:#aebbc3;line-height:1.55}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{margin-top:11px}.field label{display:block;font-size:13px;color:#cbd6dc;margin-bottom:6px}input,button,a.btn{width:100%;padding:13px 14px;border-radius:12px;font:inherit}input{border:1px solid rgba(255,255,255,.15);background:rgba(10,27,35,.92);color:#fff;outline:none}input:focus{border-color:rgba(37,211,102,.72);box-shadow:0 0 0 3px rgba(37,211,102,.11)}button,a.btn{border:0;background:linear-gradient(135deg,#31e777,#12ad58);color:#042012;font-weight:900;cursor:pointer;text-align:center;text-decoration:none;display:inline-block;margin-top:10px}.secondary{background:rgba(10,25,32,.74)!important;color:#baf5cf!important;border:1px solid rgba(37,211,102,.42)!important}.out{min-height:48px;margin-top:14px;padding:12px 13px;border-radius:12px;background:rgba(4,14,20,.5);border:1px solid rgba(255,255,255,.08);white-space:pre-wrap;color:#baf5cf;line-height:1.5}.danger{color:#ffaaaa}.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.small{font-size:12px;color:#91a4af}@media(max-width:620px){.grid,.actions{grid-template-columns:1fr}.box{padding:20px}}
+</style>
+<link rel="stylesheet" href="dados/jc-responsive-backgrounds.css?v=20260621-07G">
+</head>
+<body data-jc-bg-mobile="general"><main class="box">
+<div class="brand">JC-APK TV</div><h1>Testar conexão</h1>
+<p>Esta página confere se o GitHub novo está ligado ao Supabase novo. Ela também permite testar o login com nome de usuário ou e-mail.</p>
+<button id="testConnection" type="button">TESTAR CONEXÃO COM SUPABASE</button>
+<hr style="border:0;border-top:1px solid rgba(255,255,255,.1);margin:20px 0">
+<div class="grid"><div class="field"><label>Usuário ou e-mail</label><input id="identifier" autocomplete="username" placeholder="JoaoxxxxM ou Jxxxmxxx10xx@gmail.com"></div><div class="field"><label>Senha</label><input id="password" type="password" autocomplete="current-password" placeholder="Sua senha"></div></div>
+<button id="testLogin" type="button" class="secondary">TESTAR LOGIN</button>
+<div class="actions"><a class="btn secondary" href="redefinir-senha.html">ESQUECI MINHA SENHA</a><a class="btn secondary" href="./">VOLTAR AO INÍCIO</a></div>
+<div id="output" class="out">Aguardando o teste.</div><p class="small">Os testes temporários devem ser criados pelo painel administrativo. O login antigo <b>teste/teste</b> permanece desativado por padrão.</p>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="dados/supabase-config.js"></script><script src="dados/common.js"></script>
+<script>
+(function(){'use strict';const A=window.JC_APP,$=id=>document.getElementById(id),out=$('output');function show(t,err){out.textContent=t;out.className='out'+(err?' danger':'')}
+$('testConnection').onclick=async function(){this.disabled=true;show('Testando URL, chave pública e função de login...');try{const r=await A.testConnection();show('✅ Conexão confirmada.\nSupabase: '+r.url+'\nResposta: '+r.elapsed+' ms\nAs funções de login e do Atendente Virtual estão disponíveis.')}catch(e){show('❌ '+(e.message||e),true)}finally{this.disabled=false}};
+$('testLogin').onclick=async function(){const u=$('identifier').value.trim(),p=$('password').value;if(!u||!p)return show('Digite o usuário/e-mail e a senha.',true);this.disabled=true;show('Verificando o acesso...');try{await A.login(u,p);const access=await A.myAccess();if(!access?.profile)throw new Error('O usuário entrou no Authentication, mas não possui cadastro em profiles.');const role=access.profile.role==='admin'?'Administrador':access.profile.role==='client'?'Cliente':access.profile.role;show('✅ Login confirmado.\nNome: '+access.profile.full_name+'\nUsuário: '+access.profile.username+'\nTipo: '+role+'\nStatus: '+access.profile.status)}catch(e){show('❌ '+(e.message||e),true)}finally{this.disabled=false}};
+if(new URLSearchParams(location.search).get('auto')==='1')$('testConnection').click();
+})();
+</script></body></html>

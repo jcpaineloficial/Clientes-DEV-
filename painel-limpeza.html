@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#06111d">
+  <title>Limpeza administrativa | JC-APK TV</title>
+  <link rel="stylesheet" href="dados/common.css">
+  <link rel="stylesheet" href="dados/jc-responsive-backgrounds.css?v=20260720-02">
+  <link rel="stylesheet" href="dados/admin-quick-nav.css?v=20260720-01">
+  <style>
+    :root{--bg:#020914;--panel:rgba(5,18,33,.94);--panel2:rgba(10,31,52,.92);--line:rgba(112,180,232,.22);--text:#f5f9ff;--muted:#9fb4c7;--blue:#1d96ff;--cyan:#28d2ff;--green:#2ad694;--amber:#f5bd4f;--red:#ff6b7f}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 15% 0,rgba(18,112,214,.2),transparent 32%),linear-gradient(145deg,#020914,#061526 58%,#020914);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}.hidden{display:none!important}
+    .wrap{width:min(1540px,100%);margin:auto;padding:16px}.top{position:sticky;top:8px;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 16px;border:1px solid var(--line);border-radius:19px;background:rgba(4,16,29,.94);backdrop-filter:blur(16px);box-shadow:0 18px 55px rgba(0,0,0,.34)}.brand{display:flex;align-items:center;gap:12px}.logo{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(145deg,#1e84ff,#2ee1ff);color:#03101a;font-weight:1000}.brand h1{margin:0;font-size:19px}.brand small{display:block;margin-top:3px;color:var(--muted)}.nav{display:flex;gap:8px;flex-wrap:wrap}.btn{border:1px solid var(--line);border-radius:12px;padding:10px 13px;background:rgba(255,255,255,.055);color:#fff;font-weight:900;cursor:pointer;text-decoration:none}.btn:hover{filter:brightness(1.1)}.btn.primary{background:linear-gradient(145deg,#167ff0,#1ca8ff);border-color:transparent}.btn.danger{background:rgba(255,107,127,.15);color:#ffdbe0;border-color:rgba(255,107,127,.38)}.btn.warning{background:var(--amber);color:#2c1c00;border-color:transparent}.btn.success{background:var(--green);color:#042219;border-color:transparent}.btn:disabled{opacity:.45;cursor:not-allowed}
+    main{display:grid;gap:14px;margin-top:14px}.hero{padding:25px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(120deg,rgba(7,27,48,.96),rgba(5,19,36,.88));box-shadow:0 24px 70px rgba(0,0,0,.36)}.kicker{text-transform:uppercase;letter-spacing:.14em;font-size:12px;font-weight:1000;color:#59c6ff}.hero h2{margin:8px 0 8px;font-size:clamp(32px,5vw,58px);line-height:1}.hero h2 span{color:#29bdff}.hero p{max-width:920px;margin:0;color:#bfd0df;line-height:1.6}.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.tag{padding:8px 11px;border:1px solid rgba(66,177,255,.25);border-radius:999px;background:rgba(9,48,82,.58);font-size:12px;font-weight:900}
+    .status{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border:1px solid rgba(42,214,148,.3);border-radius:16px;background:rgba(42,214,148,.08)}.status.error{border-color:rgba(255,107,127,.38);background:rgba(255,107,127,.08)}.status b,.status small{display:block}.status small{margin-top:4px;color:var(--muted)}
+    .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.stat{padding:15px;border:1px solid var(--line);border-radius:16px;background:var(--panel)}.stat small{display:block;color:var(--muted);font-weight:800}.stat b{display:block;margin-top:7px;font-size:28px}.stat span{display:block;margin-top:4px;color:#abc0d1;font-size:11px}
+    .card{padding:18px;border:1px solid var(--line);border-radius:20px;background:var(--panel);box-shadow:0 18px 55px rgba(0,0,0,.27)}.card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}.card-head h3{margin:0}.card-head p{margin:5px 0 0;color:var(--muted);line-height:1.5}.warning-box{margin-top:14px;padding:13px;border:1px solid rgba(245,189,79,.36);border-radius:14px;background:rgba(245,189,79,.08);color:#ffe7b0}.warning-box b,.warning-box span{display:block}.warning-box span{margin-top:5px;line-height:1.5}.warning-box code{padding:3px 7px;border-radius:7px;background:#071522;color:#86ddff}
+    .actions-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;margin-top:15px}.action{display:flex;min-height:170px;flex-direction:column;justify-content:space-between;gap:13px;padding:16px;border:1px solid var(--line);border-radius:17px;background:linear-gradient(145deg,rgba(13,39,65,.9),rgba(6,22,39,.9))}.action.danger{border-color:rgba(255,107,127,.3)}.action h4{margin:0;font-size:18px}.action p{margin:7px 0 0;color:var(--muted);line-height:1.5}.action-meta{font-size:12px;color:#b7cad9}.action .btn{align-self:flex-start}
+    .operation-panel{margin-top:14px;padding:16px;border:1px solid var(--line);border-radius:17px;background:linear-gradient(145deg,rgba(13,39,65,.9),rgba(6,22,39,.9))}.operation-grid{display:grid;grid-template-columns:minmax(260px,1fr) auto;gap:12px;align-items:end}.operation-field{display:grid;gap:7px}.operation-field label{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:#c9d9e6;font-weight:1000}.operation-select{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:13px;background:#03111e;color:#fff;font-weight:800;outline:none}.operation-select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(29,150,255,.13)}.operation-summary{margin-top:13px;padding:14px;border:1px solid rgba(42,210,255,.24);border-radius:14px;background:rgba(40,210,255,.06);line-height:1.55}.operation-summary b,.operation-summary span{display:block}.operation-summary span{margin-top:5px;color:var(--muted)}.operation-summary.danger{border-color:rgba(255,107,127,.34);background:rgba(255,107,127,.07)}.operation-summary.warning{border-color:rgba(245,189,79,.34);background:rgba(245,189,79,.07)}.operation-note{margin-top:10px;color:#b8cddd;font-size:12px}.partial-warning{margin-top:10px;padding:10px 12px;border:1px solid rgba(245,189,79,.3);border-radius:12px;background:rgba(245,189,79,.07);color:#ffe7b0;font-size:12px;line-height:1.45}
+    .cleanup-mode-groups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin-top:15px}.cleanup-mode-group{padding:13px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.025)}.cleanup-mode-group h4{margin:0 0 9px}.cleanup-mode-buttons{display:grid;gap:7px}.cleanup-mode-button{width:100%;padding:10px 11px;border:1px solid var(--line);border-radius:11px;background:rgba(15,48,76,.64);color:#fff;text-align:left;font-weight:850;cursor:pointer}.cleanup-mode-button small{display:block;margin-top:3px;color:var(--muted);font-weight:500;line-height:1.35}.cleanup-mode-button:hover,.cleanup-mode-button.active{border-color:rgba(42,210,255,.5);background:rgba(29,150,255,.16)}.new-history-cycle{margin-top:14px;padding:15px;border:1px solid rgba(42,214,148,.34);border-radius:16px;background:linear-gradient(145deg,rgba(42,214,148,.1),rgba(29,150,255,.07))}.new-history-cycle h3{margin:0}.new-history-cycle p{margin:6px 0 12px;color:#c4d8e7;line-height:1.5}
+    .selected-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:14px 0 10px}.selected-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-height:360px;overflow:auto}.selected-item{display:flex;align-items:center;gap:10px;padding:11px;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.035)}.selected-item input{width:18px;height:18px;accent-color:var(--blue)}.selected-item b,.selected-item small{display:block}.selected-item small{margin-top:3px;color:var(--muted)}.empty{padding:28px;text-align:center;color:var(--muted)}
+    .history{display:grid;gap:9px}.history-item{padding:13px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.03)}.history-item-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.history-item b,.history-item small{display:block}.history-item small{margin-top:4px;color:var(--muted)}.history-item span{font-size:10px;font-weight:1000;text-transform:uppercase;color:#86d8ff}.history-item details{margin-top:9px}.history-item pre{white-space:pre-wrap;overflow:auto;padding:10px;border-radius:10px;background:#03101c;color:#ccecff;font-size:11px}
+    .modal{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(0,5,12,.78);backdrop-filter:blur(8px)}.modal.show{display:flex}.modal-card{width:min(580px,100%);max-height:92vh;overflow:auto;border:1px solid var(--line);border-radius:22px;background:#061626;box-shadow:0 32px 110px rgba(0,0,0,.66)}.modal-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:16px 18px;border-bottom:1px solid var(--line)}.modal-head h3{margin:0}.modal-body{padding:18px}.field{display:grid;gap:6px;margin-top:12px}.field label{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#c9d9e6;font-weight:1000}.field input{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;background:#03111e;color:#fff;outline:none}.field input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(29,150,255,.13)}.modal-summary{padding:12px;border:1px solid rgba(255,107,127,.3);border-radius:13px;background:rgba(255,107,127,.08);line-height:1.5}.modal-actions{display:flex;justify-content:flex-end;gap:9px;flex-wrap:wrap;margin-top:17px}
+    @media(max-width:900px){.stats,.actions-grid,.selected-list{grid-template-columns:1fr 1fr}.cleanup-mode-groups{grid-template-columns:1fr 1fr}.top{align-items:flex-start;flex-direction:column}.operation-grid{grid-template-columns:1fr}.nav{width:100%}.nav .btn{flex:1;text-align:center}}
+    @media(max-width:620px){.wrap{padding:9px}.stats,.actions-grid,.selected-list,.cleanup-mode-groups{grid-template-columns:1fr}.hero{padding:20px}.card{padding:14px}.nav{display:grid;grid-template-columns:1fr 1fr}.modal-actions .btn{flex:1}}
+  
+    body.cleanup-locked .wrap{filter:blur(5px);pointer-events:none;user-select:none}
+    .access-gate{position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(0,5,12,.82);backdrop-filter:blur(9px)}
+    .access-gate.hidden{display:none!important}.access-card{width:min(520px,100%);border:1px solid var(--line);border-radius:22px;background:#061626;box-shadow:0 32px 110px rgba(0,0,0,.7);overflow:hidden}.access-body{padding:20px}.access-note{padding:12px;border:1px solid rgba(42,210,255,.25);border-radius:13px;background:rgba(42,210,255,.06);color:#c9eaff;line-height:1.5}.access-actions{display:flex;justify-content:flex-end;gap:9px;flex-wrap:wrap;margin-top:16px}
+    .compact-history{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}.compact-history p{margin:4px 0 0;color:var(--muted)}
+    .history-modal-card{width:min(850px,100%)}
+    .history-modal-body{padding:18px;max-height:72vh;overflow:auto}
+    @media(max-width:620px){.access-actions .btn{flex:1}.compact-history .btn{width:100%}}
+</style>
+</head>
+<body class="cleanup-locked" data-jc-bg="modern-data">
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><div class="logo">JC</div><div><h1>Limpeza administrativa</h1><small>Somente ADM • confirmação reforçada</small></div></div>
+    <details class="jc-admin-nav"><summary>☰ Navegação administrativa</summary><nav class="nav jc-admin-nav-links">
+      <a class="btn" href="painel-relatorios.html">📊 Relatórios</a>
+      <a class="btn" href="painel-ativacoes.html">🔑 Ativadores e .Config</a>
+      <a class="btn" href="painel-clientes.html">👥 Clientes</a>
+      <a class="btn" href="index.html">⌂ Início</a>
+      <button id="cleanupLogoutBtn" class="btn danger" type="button">Sair</button>
+    </nav></details>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="kicker">Atualização 11 — controle protegido</div>
+      <h2>Limpeza <span>administrativa</span></h2>
+      <p>Central exclusiva do ADM para limpeza real dos Ativadores, das .config e do JC Relatórios. Antes de liberar a página, a mesma conta administrativa precisa confirmar novamente usuário ou e-mail e senha. Cada operação também exige uma frase de confirmação e cria backup integral.</p>
+      <div class="hero-tags"><span class="tag">🔐 Nova confirmação de acesso</span><span class="tag">🧾 Auditoria completa</span><span class="tag">📦 Arquivos .config preservados</span><span class="tag">💳 Saldos preservados</span></div>
+    </section>
+
+    <section id="cleanupStatus" class="status">
+      <div><b>Aguardando confirmação do ADM...</b><small>A central será carregada somente depois da nova autenticação.</small></div>
+      <button id="cleanupReloadBtn" class="btn primary" type="button">↻ Atualizar</button>
+    </section>
+
+    <section class="stats">
+      <div class="stat"><small>Total de códigos</small><b id="cleanupStatTotal">0</b><span>11 e 16 dígitos</span></div>
+      <div class="stat"><small>Vencidos após 3 dias</small><b id="cleanupStatExpired">0</b><span>Voltam para a base sem apagar histórico</span></div>
+      <div class="stat"><small>Limpeza seletiva</small><b>Ativa</b><span>Escolha exatamente o que deseja zerar</span></div>
+      <div class="stat"><small>Backup antes de apagar</small><b>Ativo</b><span>Snapshot administrativo</span></div><div class="stat"><small>Boxes Launcher</small><b id="cleanupLauncherDevices">0</b><span>Lite e Pro vinculadas</span></div><div class="stat"><small>Licenças Launcher</small><b id="cleanupLauncherLicenses">0</b><span>ativas no módulo</span></div><div class="stat"><small>Cobranças Launcher</small><b id="cleanupLauncherBilling">0</b><span>mensais ativas</span></div>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><div><h3>Escolha o tipo de limpeza</h3><p>Somente operações reais. A antiga seleção de códigos de teste foi removida desta tela.</p></div></div>
+      <div class="warning-box"><b>Proteção obrigatória</b><span>Antes de executar, o sistema exige a frase correspondente e salva backup em <code>public.jc_activation_cleanup_archives</code>. Clientes, usuários, permissões, WhatsApps, saldos atuais, créditos comprados, APKs e arquivos físicos das .config não são apagados.</span></div>
+      <div class="new-history-cycle"><h3>✨ Iniciar uma nova fase do histórico</h3><p>Zera relatórios, envios, testes técnicos e eventos do Launcher, mantendo clientes, permissões, planos, links, saldos, créditos comprados e configurações.</p><button class="btn success cleanup-mode-button" data-cleanup-mode="new_history_cycle" type="button">Preparar novo histórico a partir de agora</button></div>
+      <div class="cleanup-mode-groups">
+        <div class="cleanup-mode-group"><h4>Ativadores e .Config</h4><div class="cleanup-mode-buttons"><button class="cleanup-mode-button" data-cleanup-mode="reset_usage" type="button">Zerar uso e ativações<small>Mantém os códigos cadastrados.</small></button><button class="cleanup-mode-button" data-cleanup-mode="delete_expired" type="button">Liberar vencidos<small>Voltam para a base com histórico técnico preservado.</small></button></div></div>
+        <div class="cleanup-mode-group"><h4>Relatórios</h4><div class="cleanup-mode-buttons"><button class="cleanup-mode-button" data-cleanup-mode="reset_attendants" type="button">Relatórios das atendentes<small>Limpa somente os atendimentos registrados.</small></button><button class="cleanup-mode-button" data-cleanup-mode="reset_reports" type="button">JC Relatórios completo<small>Inclui acessos, testes ADM e atendentes.</small></button></div></div>
+        <div class="cleanup-mode-group"><h4>JC Launcher</h4><div class="cleanup-mode-buttons"><button class="cleanup-mode-button" data-cleanup-mode="reset_launcher_reports" type="button">Eventos e telemetria<small>Preserva Boxes e licenças.</small></button><button class="cleanup-mode-button" data-cleanup-mode="reset_launcher_commands" type="button">Fila de comandos<small>Limpa pendentes e histórico de comandos.</small></button><button class="cleanup-mode-button" data-cleanup-mode="detach_launcher_devices" type="button">Desvincular Boxes<small>Exige novo vínculo dos aparelhos.</small></button><button class="cleanup-mode-button" data-cleanup-mode="wipe_launcher_data" type="button">Zerar módulo Launcher<small>Apaga os dados próprios do Launcher.</small></button></div></div>
+      </div>
+      <div class="operation-panel">
+        <div class="operation-grid">
+          <div class="operation-field">
+            <label for="cleanupModeSelect">Tipo de limpeza</label>
+            <select id="cleanupModeSelect" class="operation-select">
+              <option value="">Selecione uma opção...</option>
+              <option value="new_history_cycle">Iniciar novo histórico, mantendo clientes e configurações</option>
+              <option value="reset_usage">Zerar ativações e .config, mantendo os códigos</option>
+              <option value="delete_expired">Liberar vencidos para a base, sem apagar histórico</option>
+              <option value="reset_attendants">Zerar somente os relatórios das atendentes</option>
+              <option value="reset_reports">Zerar JC Relatórios e relatórios das atendentes</option>
+              <optgroup label="JC Launcher Lite / Pro"><option value="reset_launcher_reports">Zerar relatórios e eventos do Launcher</option><option value="reset_launcher_commands">Limpar fila e histórico de comandos</option><option value="detach_launcher_devices">Desvincular todas as Boxes</option><option value="wipe_launcher_data">Limpar todos os dados do Launcher</option></optgroup>
+              <option value="wipe_all">Limpar tudo real e iniciar do zero</option>
+            </select>
+          </div>
+          <button id="cleanupContinueBtn" class="btn danger" type="button" disabled>Continuar</button>
+        </div>
+        <div id="cleanupOperationSummary" class="operation-summary">
+          <b>Nenhuma operação selecionada</b>
+          <span>Escolha uma opção acima para ver exatamente o que será alterado e a frase exigida.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="compact-history">
+        <div><h3 style="margin:0">Histórico de limpezas</h3><p id="cleanupHistorySummary">Carregando o registro administrativo mais recente...</p></div>
+        <button id="cleanupHistoryOpenBtn" class="btn primary" type="button">🧾 Ver histórico de limpezas</button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div id="cleanupAccessGate" class="access-gate" role="dialog" aria-modal="true" aria-labelledby="cleanupAccessTitle">
+  <div class="access-card">
+    <div class="modal-head"><h3 id="cleanupAccessTitle">Confirmar novamente a conta ADM</h3></div>
+    <div class="access-body">
+      <div class="access-note">A sessão do painel já foi identificada. Para entrar na área de limpeza, confirme novamente a <b>mesma conta ADM</b>. A senha não será armazenada e a sessão principal não será substituída.</div>
+      <div id="cleanupAccessMessage" class="partial-warning hidden"></div>
+      <div class="field"><label for="cleanupAccessIdentifier">Usuário ou e-mail</label><input id="cleanupAccessIdentifier" autocomplete="username"></div>
+      <div class="field"><label for="cleanupAccessPassword">Senha</label><input id="cleanupAccessPassword" type="password" autocomplete="current-password"></div>
+      <div class="access-actions"><a class="btn" href="painel-relatorios.html">Voltar</a><button id="cleanupAccessConfirmBtn" class="btn primary" type="button">Confirmar acesso</button></div>
+    </div>
+  </div>
+</div>
+
+<div id="cleanupConfirmModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="cleanupConfirmTitle">
+  <div class="modal-card">
+    <div class="modal-head"><h3 id="cleanupConfirmTitle">Confirmar operação</h3><button id="cleanupConfirmClose" class="btn" type="button">Fechar ✕</button></div>
+    <div class="modal-body">
+      <div id="cleanupModalSummary" class="modal-summary">Revise a operação antes de continuar.</div>
+      <div class="field"><label for="cleanupStrongConfirmation">Confirmação forte</label><input id="cleanupStrongConfirmation" autocomplete="off" placeholder="Digite a frase exibida acima"></div>
+      <div class="modal-actions"><button id="cleanupCancelBtn" class="btn" type="button">Cancelar</button><button id="cleanupExecuteBtn" class="btn danger" type="button">Confirmar e executar</button></div>
+    </div>
+  </div>
+</div>
+
+<div id="cleanupHistoryModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="cleanupHistoryTitle">
+  <div class="modal-card history-modal-card">
+    <div class="modal-head"><h3 id="cleanupHistoryTitle">Histórico de limpezas</h3><button id="cleanupHistoryClose" class="btn" type="button">Fechar ✕</button></div>
+    <div class="history-modal-body">
+      <div style="display:flex;justify-content:flex-end;margin-bottom:12px"><button id="cleanupHistoryReloadBtn" class="btn primary" type="button">↻ Atualizar histórico</button></div>
+      <div id="cleanupHistoryList" class="history"><div class="empty">Aguardando carregamento...</div></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="dados/supabase-config.js"></script>
+<script src="dados/common.js"></script>
+<script>
+(function(){
+  'use strict';
+  const A=window.JC_APP,$=id=>document.getElementById(id),EDGE='jc-activate';
+  const state={busy:false,unlocked:false,mode:'',codes:[],expiredCount:0,history:[],launcherStats:{devices:0,active_licenses:0,active_billing:0}};
+  const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const format=value=>{if(!value)return '—';const d=new Date(value);return Number.isNaN(d.getTime())?String(value):d.toLocaleString('pt-BR');};
+
+  function readable(value){
+    if(value==null)return '';
+    if(typeof value==='string')return value;
+    if(value instanceof Error)return value.message||String(value);
+    if(typeof value==='object'){
+      const parts=[value.message,value.details,value.hint,value.code].filter(Boolean).map(String);
+      if(parts.length)return parts.join(' | ');
+      try{return JSON.stringify(value);}catch(_error){return String(value);}
+    }
+    return String(value);
+  }
+
+  async function getValidSession(forceRefresh=false){
+    if(!A?.client)throw new Error('Supabase não configurado.');
+    let result=forceRefresh?await A.client.auth.refreshSession():await A.client.auth.getSession();
+    if(result?.error)throw result.error;
+    let session=result?.data?.session||null;
+    if(!session&&!forceRefresh){
+      result=await A.client.auth.refreshSession();
+      if(result?.error)throw result.error;
+      session=result?.data?.session||null;
+    }
+    if(!session?.access_token)throw new Error('Sessão ADM expirada. Saia e entre novamente.');
+    return session;
+  }
+
+  async function invoke(action,payload={},retry=true){
+    const session=await getValidSession(false);
+    const {data,error}=await A.client.functions.invoke(EDGE,{headers:{Authorization:`Bearer ${session.access_token}`},body:{action,...payload}});
+    if(error){
+      let detail=readable(error)||'Falha ao chamar a Edge Function.';
+      try{
+        const response=error.context;
+        if(response&&typeof response.clone==='function'){
+          const raw=await response.clone().text();
+          if(raw){
+            try{const parsed=JSON.parse(raw);detail=readable(parsed.error||parsed.reason||parsed)||detail;}
+            catch(_error){detail=raw.slice(0,700)||detail;}
+          }
+        }
+      }catch(_error){}
+      if(retry&&/INVALID_SESSION|JWT|token|session/i.test(detail)){await getValidSession(true);return invoke(action,payload,false);}
+      throw new Error(`${action}: ${detail}`);
+    }
+    if(!data?.ok){
+      const detail=readable(data?.error||data?.reason||data)||'A operação não foi concluída.';
+      if(retry&&/INVALID_SESSION|JWT|token|session/i.test(detail)){await getValidSession(true);return invoke(action,payload,false);}
+      throw new Error(`${action}: ${detail}`);
+    }
+    return data;
+  }
+
+  function setStatus(kind,title,detail){
+    const box=$('cleanupStatus');
+    box.className='status'+(kind?' '+kind:'');
+    box.querySelector('b').textContent=title;
+    box.querySelector('small').textContent=detail;
+  }
+
+  function confirmationFor(mode){return {new_history_cycle:'INICIAR NOVO HISTORICO',reset_usage:'ZERAR ATIVACOES',delete_expired:'LIBERAR VENCIDOS',reset_attendants:'ZERAR ATENDENTES',reset_reports:'ZERAR RELATORIOS',reset_launcher_reports:'ZERAR RELATORIOS LAUNCHER',reset_launcher_commands:'LIMPAR COMANDOS LAUNCHER',detach_launcher_devices:'DESVINCULAR BOXES LAUNCHER',wipe_launcher_data:'ZERAR LAUNCHER',wipe_all:'ZERAR TUDO'}[mode]||'';}
+  function modeLabel(mode){return {new_history_cycle:'os históricos operacionais do painel, dos ativadores e do Launcher, mantendo clientes e configurações',reset_usage:'todas as ativações, tentativas, entregas .config e histórico técnico, mantendo os códigos',delete_expired:'os códigos vencidos após 36 horas/3 dias sem uso, liberando para a base sem apagar o histórico',reset_attendants:'somente os registros dos relatórios das atendentes',reset_reports:'todo o JC Relatórios e também os relatórios das atendentes',reset_launcher_reports:'os relatórios, eventos e telemetria do JC Launcher',reset_launcher_commands:'a fila e o histórico de comandos do JC Launcher',detach_launcher_devices:'os vínculos e tokens das Boxes do JC Launcher',wipe_launcher_data:'todos os dados próprios do JC Launcher Lite/Pro',wipe_all:'todos os códigos, ativações, tentativas, entregas .config, histórico técnico, JC Relatórios e relatórios das atendentes'}[mode]||'a operação selecionada';}
+
+  function modeDetails(mode){
+    return {
+      new_history_cycle:{title:'Iniciar novo histórico',text:'Limpa somente históricos operacionais: JC Relatórios, atendentes, envios dos ativadores, testes e dados técnicos antigos, eventos e comandos do Launcher. Mantém clientes, permissões, planos, links, saldos, compras, APKs e configurações.',phrase:'INICIAR NOVO HISTORICO',tone:'warning'},
+      reset_usage:{title:'Zerar ativações e .config',text:`Remove ativações, tentativas, entregas e histórico técnico. Mantém os ${state.codes.length} código(s) e devolve cada um para Ativo. Códigos de revendedor recebem nova janela de 3 dias.`,phrase:'ZERAR ATIVACOES',tone:'danger'},
+      delete_expired:{title:'Liberar vencidos para a base',text:`Libera os ${state.expiredCount} código(s) bloqueado(s) por 36 horas/3 dias sem uso e sem ativação confirmada. O código volta para a base para reutilização/correção, mas o registro continua no histórico técnico como vencido/liberado e pode servir como prova ao cliente.`,phrase:'LIBERAR VENCIDOS',tone:'warning'},
+      reset_attendants:{title:'Zerar somente os relatórios das atendentes',text:'Apaga apenas os registros em public.attendant_reports e zera o contador “Atendentes com registros”. Não apaga atendentes, configurações, clientes, mídias ou permissões.',phrase:'ZERAR ATENDENTES',tone:'warning'},
+      reset_reports:{title:'Zerar JC Relatórios e relatórios das atendentes',text:'Apaga acessos registrados, histórico individual, testes do ADM, créditos consumidos e também os relatórios das atendentes. Não altera saldo atual nem total comprado.',phrase:'ZERAR RELATORIOS',tone:'warning'},
+      reset_launcher_reports:{title:'Zerar relatórios e eventos do JC Launcher',text:'Apaga somente eventos técnicos, acessos e telemetria do Launcher. Preserva Boxes, licenças, clientes, créditos e comandos.',phrase:'ZERAR RELATORIOS LAUNCHER',tone:'warning'},
+      reset_launcher_commands:{title:'Limpar fila e histórico de comandos do Launcher',text:'Apaga comandos pendentes, entregues, concluídos e seus retornos. Preserva Boxes, licenças e eventos.',phrase:'LIMPAR COMANDOS LAUNCHER',tone:'warning'},
+      detach_launcher_devices:{title:'Desvincular todas as Boxes do Launcher',text:'Remove os vínculos e tokens das Boxes sem apagar clientes nem saldos. Os APKs precisarão ser vinculados novamente.',phrase:'DESVINCULAR BOXES LAUNCHER',tone:'danger'},
+      wipe_launcher_data:{title:'Limpar todos os dados do JC Launcher',text:'Apaga Boxes, licenças, cobranças mensais, comandos, eventos e vínculos do Launcher Lite/Pro. Não apaga clientes nem os módulos antigos.',phrase:'ZERAR LAUNCHER',tone:'danger'},
+      wipe_all:{title:'Limpar tudo real — iniciar do zero',text:`Apaga os ${state.codes.length} código(s), ativações, tentativas, entregas, histórico técnico e todos os registros do JC Relatórios. Clientes, saldos, créditos comprados, permissões, WhatsApps, APKs e arquivos físicos permanecem.`,phrase:'ZERAR TUDO',tone:'danger'}
+    }[mode]||null;
+  }
+
+  function renderOperationSummary(){
+    const mode=$('cleanupModeSelect').value;
+    const info=modeDetails(mode),box=$('cleanupOperationSummary');
+    state.mode=mode;$('cleanupContinueBtn').disabled=!info;
+    box.className='operation-summary'+(info?.tone?' '+info.tone:'');
+    box.innerHTML=info?`<b>${esc(info.title)}</b><span>${esc(info.text)}</span><span>Confirmação obrigatória: <strong>${esc(info.phrase)}</strong></span>`:'<b>Nenhuma operação selecionada</b><span>Escolha uma opção acima para ver exatamente o que será alterado e a frase exigida.</span>';
+    document.querySelectorAll('[data-cleanup-mode]').forEach(button=>button.classList.toggle('active',button.dataset.cleanupMode===mode));
+  }
+
+  function expiredReusableCodes(){
+    return state.codes.filter(row=>{const status=String(row.status||'').toLowerCase(),reason=String(row.disabled_reason||'').toLowerCase();return ['disabled','expired'].includes(status)&&/(3 dias|36h|36 horas|sem uso|não utilizado|nao utilizado|vencid)/i.test(reason);});
+  }
+
+  function renderCounts(){
+    state.expiredCount=expiredReusableCodes().length;
+    $('cleanupStatTotal').textContent=state.codes.length;
+    $('cleanupStatExpired').textContent=state.expiredCount;
+    renderOperationSummary();
+  }
+
+  function renderHistory(history){
+    state.history=history||[];
+    const latest=state.history[0];
+    $('cleanupHistorySummary').textContent=latest?`${latest.message||latest.action||'Ação administrativa'} • ${format(latest.created_at)}`:'Nenhuma limpeza ou recontagem registrada.';
+    $('cleanupHistoryList').innerHTML=state.history.length?state.history.map(item=>`<article class="history-item"><div class="history-item-head"><div><b>${esc(item.message||item.action||'Ação administrativa')}</b><small>${esc(format(item.created_at))} • ${esc(item.admin_name||'Sistema')}</small></div><span>${esc(item.action||'—')}</span></div>${item.details?`<details><summary>Detalhes</summary><pre>${esc(JSON.stringify(item.details,null,2))}</pre></details>`:''}</article>`).join(''):'<div class="empty">Nenhuma limpeza ou recontagem registrada.</div>';
+  }
+
+  async function loadHistory(){
+    const data=await invoke('admin_list_cleanup_history',{limit:200});
+    renderHistory(data.history||[]);
+  }
+
+
+  async function loadLauncherStatsSafe(){
+    try{const {data,error}=await A.client.rpc('admin_launcher_cleanup_stats');if(error)throw error;state.launcherStats=data||{};}
+    catch(error){state.launcherStats={devices:0,active_licenses:0,active_billing:0,pending_integration:true};}
+    $('cleanupLauncherDevices').textContent=state.launcherStats.devices||0;$('cleanupLauncherLicenses').textContent=state.launcherStats.active_licenses||0;$('cleanupLauncherBilling').textContent=state.launcherStats.active_billing||0;
+  }
+  async function loadAll(force=false){
+    if(!state.unlocked)return;
+    if(state.busy&&!force)return;
+    state.busy=true;setStatus('','Carregando central administrativa...','Conferindo códigos vencidos por 36 horas/3 dias e histórico de limpeza.');
+    try{
+      const [codesData,historyData]=await Promise.all([invoke('admin_list_codes',{filters:{limit:1000}}),invoke('admin_list_cleanup_history',{limit:200})]);await loadLauncherStatsSafe();
+      if(codesData.access_mode!=='admin')throw new Error('Acesso exclusivo do ADM.');
+      state.codes=codesData.codes||[];renderCounts();renderHistory(historyData.history||[]);
+      setStatus('','Central de limpeza pronta',`${state.codes.length} código(s) conferidos. Escolha uma operação e confirme a frase de segurança.`);
+    }catch(error){
+      const message=readable(error)||'Falha ao carregar limpeza.';setStatus('error','Não foi possível carregar a central',message);A.toast(message,'error');
+    }finally{state.busy=false;}
+  }
+
+  async function confirmAccess(){
+    if(state.busy)return;
+    const identifier=$('cleanupAccessIdentifier').value.trim(),password=$('cleanupAccessPassword').value;
+    const messageBox=$('cleanupAccessMessage');
+    messageBox.classList.add('hidden');
+    if(!identifier||!password){messageBox.textContent='Informe usuário ou e-mail e senha.';messageBox.classList.remove('hidden');return;}
+    state.busy=true;$('cleanupAccessConfirmBtn').disabled=true;$('cleanupAccessConfirmBtn').textContent='Validando...';
+    try{
+      const current=await getValidSession(true);
+      const email=await A.resolveEmail(identifier);
+      const temp=window.supabase.createClient(A.cfg.url,A.cfg.publishableKey,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false}});
+      const {data,error}=await temp.auth.signInWithPassword({email,password});
+      if(error)throw error;
+      if(!data?.user?.id||String(data.user.id)!==String(current.user.id))throw new Error('Use a mesma conta ADM que está conectada no painel.');
+      const {data:access,error:accessError}=await temp.rpc('get_my_access');
+      if(accessError)throw accessError;
+      if(access?.profile?.role!=='admin'||String(access?.profile?.status||'active').toLowerCase()!=='active')throw new Error('A conta informada não é um ADM ativo.');
+      state.unlocked=true;document.body.classList.remove('cleanup-locked');$('cleanupAccessGate').classList.add('hidden');$('cleanupAccessPassword').value='';
+      await loadAll(true);
+    }catch(error){messageBox.textContent=readable(error)||'Não foi possível confirmar a conta ADM.';messageBox.classList.remove('hidden');}
+    finally{state.busy=false;$('cleanupAccessConfirmBtn').disabled=false;$('cleanupAccessConfirmBtn').textContent='Confirmar acesso';}
+  }
+
+  function openConfirm(){
+    const mode=$('cleanupModeSelect').value;if(!mode)return A.toast('Escolha primeiro o tipo de limpeza.','error');
+    state.mode=mode;const phrase=confirmationFor(mode);
+    const auditNote=mode==='delete_expired'?'Os códigos serão enviados para desbloqueio em lote; o histórico técnico de cada código permanece preservado.':String(mode).includes('launcher')?'Será salvo um snapshot de auditoria do módulo antes da operação.':'Antes da operação será criado o backup administrativo previsto pelo sistema.';
+    $('cleanupModalSummary').innerHTML=`Você está prestes a alterar <b>${esc(modeLabel(mode))}</b>.<br><br>Digite exatamente <b>${esc(phrase)}</b>. ${auditNote}`;
+    $('cleanupStrongConfirmation').value='';$('cleanupStrongConfirmation').placeholder=phrase;$('cleanupConfirmModal').classList.add('show');setTimeout(()=>$('cleanupStrongConfirmation').focus(),0);
+  }
+  function closeConfirm(){if(state.busy)return;$('cleanupConfirmModal').classList.remove('show');$('cleanupStrongConfirmation').value='';}
+
+  async function executeCleanup(){
+    if(state.busy)return;
+    const confirmation=$('cleanupStrongConfirmation').value.trim(),expected=confirmationFor(state.mode);
+    if(confirmation!==expected)return A.toast(`Digite exatamente ${expected}.`,'error');
+    state.busy=true;$('cleanupExecuteBtn').disabled=true;$('cleanupExecuteBtn').textContent='Executando limpeza...';
+    try{
+      await getValidSession(true);
+      let data;
+      if(state.mode==='new_history_cycle'){
+        const operations=[
+          {label:'Ativadores e .Config',run:()=>invoke('admin_real_cleanup',{mode:'reset_usage',confirmation:'ZERAR ATIVACOES'})},
+          {label:'JC Relatórios',run:()=>invoke('admin_real_cleanup',{mode:'reset_reports',confirmation:'ZERAR RELATORIOS'})},
+          {label:'Eventos do Launcher',run:async()=>{const response=await A.client.rpc('admin_launcher_cleanup',{p_mode:'reset_launcher_reports',p_confirmation:'ZERAR RELATORIOS LAUNCHER'});if(response.error)throw response.error;return response.data||{};}},
+          {label:'Comandos do Launcher',run:async()=>{const response=await A.client.rpc('admin_launcher_cleanup',{p_mode:'reset_launcher_commands',p_confirmation:'LIMPAR COMANDOS LAUNCHER'});if(response.error)throw response.error;return response.data||{};}}
+        ];
+        const completed=[],failed=[];
+        for(const operation of operations){
+          try{completed.push({label:operation.label,result:await operation.run()});}
+          catch(error){failed.push({label:operation.label,error:readable(error)||'Falha não identificada'});}
+        }
+        data={completed,failed};
+        if(!completed.length)throw new Error(`Nenhuma categoria pôde ser limpa. ${failed.map(item=>`${item.label}: ${item.error}`).join(' | ')}`);
+        if(failed.length){
+          A.toast(`Nova fase iniciada em ${completed.length} categoria(s). Revise: ${failed.map(item=>item.label).join(', ')}.`,'error');
+          setStatus('error','Nova fase concluída parcialmente',failed.map(item=>`${item.label}: ${item.error}`).join(' | '));
+        }else A.toast('Nova fase iniciada. Históricos operacionais limpos; clientes, configurações, permissões, créditos e saldos foram preservados.');
+      }else if(state.mode==='delete_expired'){
+        const expiredRows=expiredReusableCodes();
+        const codeIds=expiredRows.map(row=>String(row.id||'')).filter(Boolean);
+        if(!codeIds.length){
+          A.toast('Nenhum código vencido após 36 horas/3 dias aguardando liberação.');
+        }else{
+          data=await invoke('admin_unlock_codes',{code_ids:codeIds});
+          A.toast(`${codeIds.length} código(s) vencido(s) liberado(s) para a base. O histórico técnico foi preservado.`);
+        }
+      }else if(String(state.mode).includes('launcher')){
+        const response=await A.client.rpc('admin_launcher_cleanup',{p_mode:state.mode,p_confirmation:confirmation});if(response.error)throw response.error;data={result:response.data||{}};
+        const result=data.result||{};
+        const total=(result.deleted_events||0)+(result.deleted_commands||0)+(result.deleted_licenses||0)+(result.affected_devices||0);
+        A.toast(`Operação do Launcher concluída. ${result.deleted_events||0} evento(s), ${result.deleted_commands||0} comando(s), ${result.deleted_licenses||0} licença(s) e ${result.affected_devices||0} Box(es) afetada(s). Total: ${total}.`);
+      }else{
+        data=await invoke('admin_real_cleanup',{mode:state.mode,confirmation});
+        const result=data.result||{};
+        const total=(result.deleted_codes||0)+(result.reset_codes||0)+(result.deleted_activations||0)+(result.deleted_deliveries||0)+(result.deleted_report_events||0)+(result.deleted_attendant_reports||0);
+        A.toast(`Operação concluída. ${result.deleted_codes||0} código(s) apagado(s), ${result.reset_codes||0} reativado(s), ${result.deleted_activations||0} ativação(ões), ${result.deleted_deliveries||0} entrega(s), ${result.deleted_report_events||0} registro(s) do JC Relatórios e ${result.deleted_attendant_reports||0} relatório(s) das atendentes removido(s). Total: ${total}.`);
+      }
+      $('cleanupConfirmModal').classList.remove('show');$('cleanupStrongConfirmation').value='';await loadAll(true);
+    }catch(error){const message=readable(error)||'Falha na limpeza.';A.toast(message,'error');setStatus('error','A limpeza não foi concluída',message);}
+    finally{state.busy=false;$('cleanupExecuteBtn').disabled=false;$('cleanupExecuteBtn').textContent='Confirmar e executar';}
+  }
+
+  function bind(){
+    $('cleanupModeSelect').addEventListener('change',renderOperationSummary);
+    document.querySelectorAll('[data-cleanup-mode]').forEach(button=>button.addEventListener('click',()=>{
+      $('cleanupModeSelect').value=button.dataset.cleanupMode||'';
+      renderOperationSummary();
+      document.querySelector('.operation-panel')?.scrollIntoView({behavior:'smooth',block:'center'});
+    }));
+    $('cleanupContinueBtn').onclick=openConfirm;$('cleanupConfirmClose').onclick=closeConfirm;$('cleanupCancelBtn').onclick=closeConfirm;$('cleanupExecuteBtn').onclick=executeCleanup;
+    $('cleanupConfirmModal').addEventListener('click',event=>{if(event.target===$('cleanupConfirmModal'))closeConfirm();});
+    $('cleanupReloadBtn').onclick=()=>loadAll(true);
+    $('cleanupAccessConfirmBtn').onclick=confirmAccess;
+    $('cleanupAccessPassword').addEventListener('keydown',event=>{if(event.key==='Enter')confirmAccess();});
+    $('cleanupStrongConfirmation').addEventListener('keydown',event=>{if(event.key==='Enter')executeCleanup();});
+    $('cleanupHistoryOpenBtn').onclick=async()=>{$('cleanupHistoryModal').classList.add('show');try{await loadHistory();}catch(error){$('cleanupHistoryList').innerHTML=`<div class="empty">${esc(readable(error))}</div>`;}};
+    $('cleanupHistoryClose').onclick=()=>$('cleanupHistoryModal').classList.remove('show');
+    $('cleanupHistoryReloadBtn').onclick=async()=>{try{await loadHistory();}catch(error){A.toast(readable(error),'error');}};
+    $('cleanupHistoryModal').addEventListener('click',event=>{if(event.target===$('cleanupHistoryModal'))$('cleanupHistoryModal').classList.remove('show');});
+    $('cleanupLogoutBtn').onclick=async()=>{await A.client?.auth.signOut();location.href='index.html';};
+    renderOperationSummary();
+  }
+
+  async function init(){
+    bind();
+    if(!A?.ready||!A?.client){setStatus('error','Supabase não configurado','Confira dados/supabase-config.js.');return;}
+    setStatus('','Aguardando confirmação da conta ADM...','Informe novamente usuário ou e-mail e senha para liberar a central.');
+  }
+
+  document.addEventListener('jc:admin-liberado',async()=>{
+    try{await getValidSession(true);$('cleanupAccessGate').classList.remove('hidden');setTimeout(()=>$('cleanupAccessIdentifier').focus(),0);}
+    catch(error){setStatus('error','Não foi possível validar a sessão',readable(error));}
+  });
+  document.addEventListener('DOMContentLoaded',init);
+})();
+</script>
+<script src="dados/admin-gate.js" data-title="Limpeza administrativa" data-description="Validação inicial da sessão ADM antes da confirmação reforçada da área de limpeza." data-roles="admin" data-back-url="painel-relatorios.html" data-back-label="← Voltar ao JC Relatórios"></script>
+</body>
+</html>

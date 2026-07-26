@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#06111d">
+<title>Cadastro da Revenda | JC-APK TV</title><link rel="stylesheet" href="dados/common.css">
+<style>
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:url('assets/jc-apk-background.webp') center/cover no-repeat;filter:brightness(.25)}body::after{content:"";position:fixed;inset:0;z-index:-1;background:rgba(3,10,17,.9)}.wrap{width:min(760px,100%);margin:auto;padding:18px}.card{margin-top:2vh;padding:24px;border:1px solid var(--line);border-radius:24px;background:rgba(9,26,41,.94);box-shadow:var(--shadow)}.brand{display:flex;align-items:center;gap:12px}.logo{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(145deg,var(--blue),#24d8ff);color:#03121d;font-weight:1000}.brand h1{margin:0}.muted{color:var(--muted);line-height:1.55}.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.field{display:grid;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:11px;text-transform:uppercase;letter-spacing:.05em;font-weight:900;color:#cbd9e6}.field input,.field textarea{width:100%;padding:12px;border-radius:11px;border:1px solid var(--line);background:#061522;color:#fff;outline:none}.field textarea{min-height:90px;resize:vertical}.btn{width:100%;margin-top:14px;padding:13px;border:0;border-radius:12px;background:var(--green);color:#052117;font-weight:900;cursor:pointer}.btn:disabled{opacity:.5;cursor:not-allowed}.preview{display:none;margin-top:14px;white-space:pre-wrap;padding:14px;border-radius:14px;border:1px solid rgba(41,211,145,.25);background:rgba(41,211,145,.06);line-height:1.55}.preview.show{display:block}.actions{display:flex;gap:8px}.actions .btn{flex:1}.actions .blue{background:var(--blue);color:#fff}.note{margin-top:10px;padding:12px;border-radius:12px;background:rgba(28,145,255,.08);border:1px solid rgba(28,145,255,.25);color:#d8ebff;font-size:12px;line-height:1.5}.msg{margin-top:10px;min-height:20px;color:#ffd0d7}.msg.ok{color:#bff7d6}.successBox{display:none;margin-top:16px;padding:18px;border-radius:18px;border:1px solid rgba(41,211,145,.35);background:rgba(41,211,145,.10);color:#dfffee;line-height:1.55}.successBox.show{display:block}.successBox h2{margin:0 0 8px;font-size:22px}.hide-after-send{display:none!important}@media(max-width:650px){.grid{grid-template-columns:1fr}.field.full{grid-column:auto}.card{padding:18px}.actions{flex-direction:column}}
+</style><link rel="stylesheet" href="dados/jc-responsive-backgrounds.css?v=20260621-07G">
+</head>
+<body data-jc-bg-mobile="general"><main class="wrap"><section class="card">
+<div class="brand"><div class="logo">JC</div><div><h1 id="title">Cadastro da revenda</h1><p class="muted" id="subtitle">Preencha seus dados. O cadastro será enviado para o revendedor conferir e liberar no painel dele.</p></div></div>
+<form id="form">
+<div class="grid">
+<div class="field"><label>Nome de usuário desejado</label><input id="username" required placeholder="Ex.: Santos" autocomplete="username"></div>
+<div class="field"><label>Nome completo</label><input id="fullName" required placeholder="Ex.: Eliseu dos Santos de Paula" autocomplete="name"></div>
+<div class="field"><label>E-mail</label><input id="email" type="email" required autocomplete="email" placeholder="nome@email.com"></div>
+<div class="field"><label>WhatsApp principal com DDD</label><input id="whatsapp" required inputmode="tel" placeholder="31972115757"></div>
+<div class="field"><label>WhatsApp 2 (opcional)</label><input id="whatsapp2" inputmode="tel" placeholder="Outro celular"></div>
+<div class="field"><label>WhatsApp 3 (opcional)</label><input id="whatsapp3" inputmode="tel" placeholder="Outro celular"></div>
+<div class="field full"><label>Observação para o revendedor (opcional)</label><textarea id="notes" placeholder="Ex.: nome combinado, aparelho, função combinada ou outra observação."></textarea></div>
+</div>
+<div class="note">Este cadastro entra como cliente por créditos da revenda. As funções e os créditos são liberados depois pelo revendedor, dentro do painel dele.</div>
+<button id="submitBtn" class="btn" type="submit">Enviar cadastro para o revendedor</button><div id="msg" class="msg"></div>
+</form>
+<div id="successBox" class="successBox"><h2>Cadastro enviado com sucesso ✅</h2><p><b>Cadastro enviado com sucesso. Aguarde o retorno do revendedor.</b></p><p>O revendedor vai conferir os dados, liberar as funções combinadas e avisar você pelo WhatsApp cadastrado.</p></div>
+<div id="preview" class="preview"></div><div id="actions" class="actions" style="display:none"><button id="copy" class="btn blue" type="button">Copiar comprovante</button><button id="send" class="btn" type="button">Enviar comprovante ao revendedor</button></div>
+<p class="muted" style="font-size:12px;margin-top:16px">Seu acesso poderá ser realizado usando o <b>nome de usuário ou o e-mail</b>. A liberação será feita pelo revendedor. Nunca envie senha bancária ou documentos neste formulário.</p>
+</section></main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="dados/supabase-config.js"></script><script src="dados/common.js"></script>
+<script>
+(function(){
+  "use strict";
+  const $=id=>document.getElementById(id);
+  const params=new URLSearchParams(location.search);
+  const resellerId=params.get("revendedor")||params.get("r")||params.get("reseller_id")||"";
+  const resellerName=params.get("nome_revendedor")||params.get("revendedor_nome")||"";
+  const resellerUsername=params.get("usuario_revendedor")||params.get("reseller_username")||"";
+  const resellerContact=String(params.get("contato")||"").replace(/\D/g,"");
+  let lastRequest=null;
+  if(resellerName){$("subtitle").textContent=`Preencha seus dados. O cadastro será enviado para ${resellerName} conferir e liberar no painel dele.`;}
+  if(!resellerId){
+    $("msg").textContent="Link de revenda inválido. Abra o link enviado pelo revendedor dentro da Área do Revendedor.";
+    $("submitBtn").disabled=true;
+  }
+  function uuid(){return crypto.randomUUID?crypto.randomUUID():"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g,function(c){const r=Math.random()*16|0,v=c==="x"?r:(r&3|8);return v.toString(16)})}
+  function digits(v){let d=String(v||"").replace(/\D/g,"");if((d.length===10||d.length===11)&&!d.startsWith("55"))d="55"+d;return d}
+  function validPhone(v){const d=digits(v);return d.length===12||d.length===13}
+  function sentKey(payload){return "jc_revenda_cadastro_enviado_"+[resellerId,String(payload.username||"").toLowerCase(),String(payload.email||"").toLowerCase(),String(payload.whatsapp||"")].join("_")}
+  function markSent(payload){try{localStorage.setItem(sentKey(payload),JSON.stringify({date:new Date().toISOString(),payload}))}catch(_){}}
+  function alreadySent(payload){try{return !!localStorage.getItem(sentKey(payload))}catch(_){return false}}
+  function showFinalSuccess(payload){lastRequest={...payload};markSent(lastRequest);$("preview").textContent=summary(lastRequest);$("preview").classList.add("show");$("actions").style.display="flex";$("successBox").classList.add("show");$("form").classList.add("hide-after-send");$("msg").className="msg ok";$("msg").textContent="Cadastro enviado com sucesso. Aguarde o retorno do revendedor.";}
+  function openSellerWhatsapp(payload){const text=summary(payload);const url=resellerContact?"https://wa.me/"+resellerContact+"?text="+encodeURIComponent(text):"https://api.whatsapp.com/send?text="+encodeURIComponent(text);window.open(url,"_blank","noopener")}
+  function summary(payload){return `✅ CADASTRO ENVIADO PARA A REVENDA JC-APK TV\n\nRevendedor: ${resellerName||"Revenda por créditos"}\nTipo: Cliente por créditos\nNome de usuário: ${payload.username}\nNome completo: ${payload.full_name}\nE-mail: ${payload.email}\nWhatsApp principal: ${payload.whatsapp}\nWhatsApp 2: ${payload.whatsapp2||"Não informado"}\nWhatsApp 3: ${payload.whatsapp3||"Não informado"}${payload.notes?"\nObservação: "+payload.notes:""}\n\nAguarde o revendedor conferir o cadastro, liberar as funções combinadas e colocar os créditos.`}
+  async function submitRequest(payload){
+    if(!resellerId)throw new Error("Link de revenda inválido. Peça um novo link ao revendedor.");
+    const noteText=String(payload.notes||"").trim();
+    const request={
+      id:payload.id,
+      request_type:"client",
+      username:payload.username,
+      full_name:payload.full_name,
+      email:payload.email,
+      whatsapp:payload.whatsapp,
+      whatsapp2:payload.whatsapp2,
+      whatsapp3:payload.whatsapp3,
+      plan_months:null,
+      old_client:false,
+      last_version_html_name:null,
+      quote_requested:false,
+      quote_description:null,
+      status:"pending",
+      payload:{...payload.payload,source:"reseller_public_form",reseller_source:"reseller_public_form",reseller_id:resellerId,reseller_name:resellerName,reseller_username:resellerUsername,reseller_contact:resellerContact,revenda_destino:"revendedor",observacao_revendedor:noteText,notes:noteText}
+    };
+    const {error}=await window.JC_APP.client.from("client_requests").insert(request);
+    if(error)throw error;
+  }
+  $("form").onsubmit=async e=>{e.preventDefault();$("msg").className="msg";$("msg").textContent="Enviando...";$("submitBtn").disabled=true;try{if(!validPhone($("whatsapp").value))throw new Error("Informe um WhatsApp principal válido com DDD.");for(const id of ["whatsapp2","whatsapp3"])if($(id).value&&!validPhone($(id).value))throw new Error("Confira os celulares opcionais.");if(!window.JC_APP?.ready)throw new Error("A conexão do formulário ainda não foi configurada.");const payload={id:uuid(),request_type:"client",username:$("username").value.trim(),full_name:$("fullName").value.trim(),email:$("email").value.trim().toLowerCase(),whatsapp:digits($("whatsapp").value),whatsapp2:$("whatsapp2").value?digits($("whatsapp2").value):null,whatsapp3:$("whatsapp3").value?digits($("whatsapp3").value):null,plan_months:null,old_client:false,last_version_html_name:null,quote_requested:false,quote_description:null,notes:$("notes").value.trim(),payload:{user_agent:navigator.userAgent,source:"reseller_public_form",reseller_source:"reseller_public_form",reseller_id:resellerId,reseller_name:resellerName,reseller_username:resellerUsername,reseller_contact:resellerContact,revenda_destino:"revendedor"}};if(alreadySent(payload)){showFinalSuccess(payload);$("msg").textContent="Este cadastro já foi enviado neste aparelho. Aguarde o retorno do revendedor.";return;}await submitRequest(payload);showFinalSuccess(payload);setTimeout(()=>openSellerWhatsapp(payload),400);}catch(err){$("msg").textContent=err.message||"Não foi possível enviar.";}finally{if(!$("form").classList.contains("hide-after-send"))$("submitBtn").disabled=false}};
+  $("copy").onclick=()=>navigator.clipboard.writeText(summary(lastRequest)).then(()=>alert("Comprovante copiado."));
+  $("send").onclick=()=>{if(lastRequest)openSellerWhatsapp(lastRequest)};
+})();
+</script></body></html>

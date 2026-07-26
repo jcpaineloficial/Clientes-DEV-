@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="pt-BR" class="jc-admin-checking">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#020713">
+  <title>JC-APK TV | Ativadores e .Config — Atualização 11</title>
+  <meta name="description" content="Gerenciamento dos Ativadores 11 e 16, aparelhos, validade, uso das .config e relatório do Acesse Aqui.">
+  <link rel="stylesheet" href="dados/common.css">
+  <link rel="stylesheet" href="dados/admin-quick-nav.css?v=20260720-01">
+  <link rel="stylesheet" href="dados/admin-gate.css">
+  <link rel="stylesheet" href="dados/activation-code-manager.css?v=20260627-11C07">
+  <link rel="stylesheet" href="dados/jc-responsive-backgrounds.css?v=20260621-07G">
+</head>
+<body data-jc-bg-mobile="activators">
+  <div class="acm-wrap">
+    <header class="acm-top">
+      <div class="acm-brand">
+        <div class="acm-logo">JC</div>
+        <div>
+          <h1>Ativadores e .Config</h1>
+          <small id="acmTopStatus">Validando sua sessão...</small>
+        </div>
+      </div>
+      <details class="jc-admin-nav"><summary>☰ Navegação administrativa</summary><nav class="acm-top-actions jc-admin-nav-links" aria-label="Navegação">
+        <a class="acm-btn ghost" href="painel-relatorios.html">📊 Relatórios</a>
+        <a id="acmClientsLink" class="acm-btn ghost" href="painel-clientes.html">👥 Clientes</a>
+        <a id="acmCleanupLink" class="acm-btn ghost" href="painel-limpeza.html" data-admin-only hidden>🧹 Limpeza</a>
+        <a class="acm-btn ghost" href="index.html">⌂ Início</a>
+        <button id="acmLogoutBtn" class="acm-btn danger" type="button">Sair</button>
+      </nav></details>
+    </header>
+
+    <main class="acm-main" id="activationManagerApp">
+      <section class="acm-hero">
+        <div class="acm-hero-content">
+          <div class="acm-kicker">Atualização 11 — gerenciamento completo</div>
+          <h2>Ativadores e <span>.Config</span></h2>
+          <p id="acmHeroText">Códigos 11/16, validade, aparelhos, uso das .config e relatório do Acesse Aqui, respeitando ADM, revendedor e cliente final.</p>
+          <div class="acm-hero-tags">
+            <span class="acm-tag" id="acmAccessTag">🔐 Validando acesso</span>
+            <span class="acm-tag">⏳ Validade de 3 dias</span>
+            <span class="acm-tag">📺 Aparelho detalhado</span>
+            <span class="acm-tag">🌐 Acesse Aqui</span>
+            <span class="acm-tag">☁️ jc-activate + jc-download 13A</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="acmBackendStatus" class="acm-backend">
+        <div>
+          <b>Verificando integração...</b>
+          <small>A página usa sua sessão e a Edge Function. A chave service_role nunca fica no navegador.</small>
+        </div>
+        <button id="acmRetryBtn" class="acm-btn warning compact" type="button">Tentar novamente</button>
+      </section>
+
+      <section class="acm-view-switch" aria-label="Área do gerenciador">
+        <button class="acm-view-btn active" data-view="codes" type="button">🔑 Códigos e aparelhos</button>
+        <button class="acm-view-btn" data-view="configs" data-admin-only hidden type="button">📦 Uso das .config</button>
+        <button class="acm-view-btn" data-view="accessHere" data-admin-only hidden type="button">🌐 Acesse Aqui</button>
+      </section>
+
+      <div id="acmCodesView" class="acm-view active">
+        <section class="acm-stats" aria-label="Resumo dos códigos">
+          <div class="acm-stat"><small>Total encontrado</small><b id="acmStatTotal">0</b><span>11 e 16 dígitos</span></div>
+          <div class="acm-stat"><small>Ativos</small><b id="acmStatActive">0</b><span>Disponíveis</span></div>
+          <div class="acm-stat"><small>Reservados</small><b id="acmStatReserved">0</b><span>Em andamento</span></div>
+          <div class="acm-stat"><small>Utilizados</small><b id="acmStatUsed">0</b><span>Confirmados</span></div>
+          <div class="acm-stat"><small>Bloqueados</small><b id="acmStatDisabled">0</b><span>Inclui 3 dias</span></div>
+          <div class="acm-stat"><small>Falharam</small><b id="acmStatFailed">0</b><span>Com erro</span></div>
+        </section>
+
+        <section class="acm-card">
+          <div class="acm-card-head">
+            <div>
+              <h3>Códigos de ativação</h3>
+              <p id="acmScopeDescription">Carregando seu escopo de acesso...</p>
+            </div>
+            <button id="acmReloadBtn" class="acm-btn primary" type="button">↻ Atualizar lista</button>
+          </div>
+
+          <div class="acm-type-switch" role="group" aria-label="Tipo do ativador">
+            <button class="acm-type-btn active" data-code-type="" type="button">Todos</button>
+            <button class="acm-type-btn" data-code-type="11" type="button">11 dígitos</button>
+            <button class="acm-type-btn" data-code-type="16" type="button">16 dígitos</button>
+          </div>
+
+          <div class="acm-filters">
+            <div class="acm-field"><label for="acmClientSearch">Cliente</label><input id="acmClientSearch" placeholder="Nome ou usuário"></div>
+            <div class="acm-field"><label for="acmLast4Search">Últimos 4</label><input id="acmLast4Search" inputmode="numeric" maxlength="4" placeholder="0000"></div>
+            <div class="acm-field"><label for="acmStatusFilter">Status</label><select id="acmStatusFilter"><option value="">Todos</option><option value="active">active</option><option value="reserved">reserved</option><option value="used">used</option><option value="disabled">disabled</option><option value="expired">expired</option><option value="failed">failed</option></select></div>
+            <div class="acm-field"><label for="acmCreatedFrom">Criado a partir</label><input id="acmCreatedFrom" type="date"></div>
+            <div class="acm-field"><label for="acmCreatedTo">Criado até</label><input id="acmCreatedTo" type="date"></div>
+            <button id="acmFilterBtn" class="acm-btn primary" type="button">Filtrar</button>
+          </div>
+
+          <div class="acm-bulk" data-admin-only hidden>
+            <div><strong><span id="acmSelectedCount">0</span> selecionado(s)</strong><small>Ações abaixo são exclusivas do ADM e ficam registradas.</small></div>
+            <div class="acm-bulk-actions">
+              <button id="acmSelectAllBtn" class="acm-btn ghost compact" type="button">Selecionar todos</button>
+              <button id="acmUnlockSelectedBtn" class="acm-btn success compact" type="button">Desbloquear</button>
+              <button id="acmDisableSelectedBtn" class="acm-btn warning compact" type="button">Desativar</button>
+              <button id="acmMarkTestBtn" class="acm-btn ghost compact" type="button">Marcar teste</button>
+              <button id="acmMarkProductionBtn" class="acm-btn ghost compact" type="button">Marcar produção</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="acm-card">
+          <div class="acm-table-wrap">
+            <table class="acm-table">
+              <thead><tr><th data-admin-only hidden><input id="acmSelectAllCheckbox" type="checkbox" aria-label="Selecionar todos"></th><th>Código</th><th>Cliente</th><th>Status</th><th>Validade</th><th>CONFIG</th><th>Aparelho</th><th>Datas</th><th>Ações</th></tr></thead>
+              <tbody id="acmCodesBody"><tr><td colspan="9" class="acm-empty">Aguardando carregamento...</td></tr></tbody>
+            </table>
+          </div>
+          <div id="acmCodesMobile" class="acm-mobile"><div class="acm-empty">Aguardando carregamento...</div></div>
+        </section>
+      </div>
+
+      <div id="acmConfigsView" class="acm-view" data-admin-only hidden>
+        <section class="acm-card">
+          <div class="acm-card-head">
+            <div><h3>Uso das .config — somente ADM</h3><p>Limite, utilizadas, reservadas, disponíveis, origem e responsável por cada entrega.</p></div>
+            <div class="acm-card-actions">
+              <button id="acmRecountConfigsBtn" class="acm-btn warning" type="button">⟳ Recontar com segurança</button>
+              <button id="acmReloadConfigsBtn" class="acm-btn primary" type="button">↻ Atualizar .config</button>
+            </div>
+          </div>
+          <div id="acmConfigSummary" class="acm-config-summary"></div>
+          <div id="acmConfigsList" class="acm-config-list"><div class="acm-empty">Abra esta área para carregar o uso das .config.</div></div>
+        </section>
+      </div>
+
+      <div id="acmAccessHereView" class="acm-view" data-admin-only hidden>
+        <section class="acm-card">
+          <div class="acm-card-head">
+            <div>
+              <h3>Relatório do Acesse Aqui — somente ADM</h3>
+              <p>Downloads do Acesse Aqui com cliente, quem realizou, dispositivo/navegador usado, versão, limite diário, data e status. O dispositivo exibido é o usado para baixar, não a TV Box onde foi instalado.</p>
+            </div>
+            <button id="acmReloadAccessHereBtn" class="acm-btn primary" type="button">↻ Atualizar Acesse Aqui</button>
+          </div>
+          <div class="acm-filters" style="margin-bottom:16px">
+            <div class="acm-field"><label for="acmAccessHereSearch">Cliente, autor ou dispositivo</label><input id="acmAccessHereSearch" placeholder="Nome, usuário, aparelho ou navegador"></div>
+            <div class="acm-field"><label for="acmAccessHereStatus">Status</label><select id="acmAccessHereStatus"><option value="">Todos</option><option value="confirmed">Confirmado</option><option value="reserved">Reservado</option><option value="cancelled">Cancelado</option><option value="failed">Falhou</option></select></div>
+            <div class="acm-field"><label for="acmAccessHereMode">Tipo</label><select id="acmAccessHereMode"><option value="">Todos</option><option value="client">Cliente</option><option value="admin">ADM sem contabilizar</option></select></div>
+            <button id="acmFilterAccessHereBtn" class="acm-btn primary" type="button">Filtrar</button>
+          </div>
+          <div id="acmAccessHereSummary" class="acm-config-summary"></div>
+          <div id="acmAccessHereList" class="acm-config-list"><div class="acm-empty">Abra esta área para carregar o relatório do Acesse Aqui.</div></div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div id="acmModal" class="acm-modal" role="dialog" aria-modal="true" aria-labelledby="acmModalTitle">
+    <div class="acm-modal-card">
+      <div class="acm-modal-head"><h3 id="acmModalTitle">Detalhes</h3><button id="acmModalClose" class="acm-btn ghost compact" type="button">Fechar ✕</button></div>
+      <div id="acmModalBody" class="acm-modal-body"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="dados/supabase-config.js"></script>
+  <script src="dados/common.js"></script>
+  <script src="dados/activation-code-manager.js?v=20260630-13A"></script>
+  <script src="dados/admin-gate.js" data-title="Ativadores e .Config — Atualização 11" data-description="Entre com sua conta para acessar códigos, aparelhos, .config e históricos permitidos ao seu nível." data-roles="admin,client" data-back-url="painel-relatorios.html" data-back-label="← Voltar ao JC Relatórios"></script>
+</body>
+</html>

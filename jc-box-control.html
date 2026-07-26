@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#06111d">
+  <title>JC Box Control | Launcher Lite e Pro</title>
+  <link rel="stylesheet" href="dados/common.css">
+  <link rel="stylesheet" href="dados/jc-responsive-backgrounds.css?v=20260720-02">
+  <link rel="stylesheet" href="dados/launcher-module.css?v=20260703-13A34-ACESSOS-ORIGINAL">
+  <link rel="stylesheet" href="dados/jc-box-control.css?v=20260704-12D04-BOX-CORRETA">
+</head>
+<body data-jc-bg="modern-data">
+<main class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div class="logo">JC</div>
+      <div><h1>JC Box Control</h1><small>Launcher Lite + Pro</small></div>
+    </div>
+    <nav class="actions">
+      <a class="btn" href="geradores/">← Painel do cliente</a>
+      <a class="btn" href="index.html">⌂ Início</a>
+      <button class="btn blue" id="reloadBtn" type="button">↻ Atualizar</button>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <h2>Controle central das TV Boxes</h2>
+      <p>Configure cobrança, PIX, WhatsApp, aplicativos vinculados à mensalidade, mensagens editáveis e equipamentos cedidos. A falta de pagamento bloqueia somente os aplicativos selecionados; o bloqueio total fica reservado à devolução de aparelho alugado ou emprestado.</p>
+    </div>
+    <span class="mode demo" id="modeBadge">CARREGANDO</span>
+  </section>
+
+  <section class="stats">
+    <div class="stat"><b id="statDevices">0</b><span>Boxes vinculadas</span></div>
+    <div class="stat"><b id="statOnline">0</b><span>Online agora</span></div>
+    <div class="stat"><b id="statLite">0</b><span>Launcher Lite</span></div>
+    <div class="stat"><b id="statPro">0</b><span>Launcher Pro</span></div>
+    <div class="stat"><b id="statConfiguredApps">0</b><span>Apps na cobrança</span></div>
+    <div class="stat"><b id="statOverdue">0</b><span>Ciclos vencidos</span></div>
+    <div class="stat"><b id="statReturns">0</b><span>Devoluções pendentes</span></div>
+    <div class="stat"><b id="statPendingCommands">0</b><span>Comandos pendentes</span></div>
+  </section>
+
+  <section class="layout">
+    <aside class="panel">
+      <div class="panel-head">
+        <div><h3>TV Boxes</h3><small>Escolha uma Box para administrar</small></div>
+        <div class="panel-head-actions">
+          <button class="btn blue" id="launcherAccessBtn" type="button">🔐 Acesso</button>
+          <button class="btn green" id="newDeviceBtn" type="button">+ Box</button>
+        </div>
+      </div>
+      <div class="filters">
+        <button class="filter active" data-filter="all" type="button">Todas</button>
+        <button class="filter" data-filter="lite" type="button">Lite</button>
+        <button class="filter" data-filter="pro" type="button">Pro</button>
+        <button class="filter" data-filter="online" type="button">Online</button>
+      </div>
+      <div class="device-list" id="deviceList"></div>
+    </aside>
+
+    <section class="panel detail-panel">
+      <div class="detail-empty" id="detailEmpty">
+        <div><div style="font-size:48px">📺</div><h3>Selecione uma TV Box</h3><p>As configurações de cobrança, aplicativos e equipamento aparecerão aqui.</p></div>
+      </div>
+
+      <div class="detail" id="detail">
+        <div class="device-hero">
+          <div>
+            <span class="jc-launcher-stage-badge" id="detailEdition">LITE</span>
+            <h3 id="detailName">Box</h3>
+            <small id="detailModel">Android TV</small>
+          </div>
+          <div class="device-status-stack">
+            <span class="pill offline" id="detailStatus">OFFLINE</span>
+            <span class="device-owner" id="detailOwner">Proprietário: —</span>
+            <div class="device-admin-actions"><button class="btn small" id="disconnectSelectedBoxBtn" type="button">Desconectar</button><button class="btn small red" id="deleteSelectedBoxBtn" type="button">Excluir Box</button></div>
+          </div>
+        </div>
+        <div class="box-selection-warning" id="boxSelectionWarning" hidden></div>
+
+        <nav class="tabs" aria-label="Seções do JC Box Control">
+          <button class="tab active" data-tab="overview" type="button">Visão geral</button>
+          <button class="tab" data-tab="billing" type="button">Cobrança e PIX</button>
+          <button class="tab" data-tab="apps" type="button">Aplicativos cobrados</button>
+          <button class="tab" data-tab="install" type="button">Instalação de APKs</button>
+          <button class="tab" data-tab="favorites" type="button">Favoritos</button>
+          <button class="tab" data-tab="equipment" type="button">Equipamento</button>
+          <button class="tab" data-tab="messages" type="button">Mensagens</button>
+          <button class="tab" data-tab="history" type="button">Histórico</button>
+        </nav>
+
+        <section class="pane active" data-pane="overview">
+          <div class="meta">
+            <div><small>Último contato</small><b id="detailSeen">—</b></div>
+            <div><small>Android</small><b id="detailAndroid">—</b></div>
+            <div><small>Licença</small><b id="detailLicense">—</b></div>
+            <div><small>Vencimento</small><b id="detailExpires">—</b></div>
+            <div><small>Versão de configuração</small><b id="detailConfigVersion">0</b></div>
+          </div>
+
+          <div class="summary-grid">
+            <div class="summary-card"><small>Cobrança</small><b id="summaryBilling">OFF</b><span id="summaryBillingText">Não configurada</span></div>
+            <div class="summary-card"><small>Apps vinculados</small><b id="summaryApps">0</b><span>Bloqueio somente nos escolhidos</span></div>
+            <div class="summary-card"><small>Ciclo atual</small><b id="summaryCycle">—</b><span id="summaryCycleText">Sem ciclo</span></div>
+            <div class="summary-card"><small>Equipamento</small><b id="summaryEquipment">PRÓPRIO</b><span id="summaryEquipmentText">Sem devolução pendente</span></div>
+            <div class="summary-card"><small>Sincronização</small><b id="summarySync">—</b><span id="summarySyncText">Credencial ainda não emitida</span></div>
+          </div>
+
+          <div class="rule-banner"><strong>Regra fixa de segurança:</strong> inadimplência nunca bloqueia a Launcher inteira. Ela bloqueia somente os aplicativos marcados nesta conta. O bloqueio total aparece apenas na área <strong>Equipamento</strong>, quando o aparelho é alugado ou emprestado e foi solicitada a devolução.</div>
+
+          <div class="license-box">
+            <div><b>Licença independente por créditos</b><small>Regra-base: 1 crédito libera 1 mês para 1 Box, independentemente do plano principal.</small></div>
+            <button class="btn green" id="licenseBtn" type="button">Gerenciar licença</button>
+          </div>
+
+          <div class="quick-actions">
+            <button class="quick-action" data-open-tab="billing" type="button"><span>💳</span>Cobrança<small>PIX, vencimento e WhatsApp</small></button>
+            <button class="quick-action" data-open-tab="apps" type="button"><span>📱</span>Aplicativos<small>Escolher o que será cobrado</small></button>
+            <button class="quick-action" data-open-tab="equipment" type="button"><span>📦</span>Equipamento<small>Próprio, alugado ou emprestado</small></button>
+            <button class="quick-action" data-open-tab="messages" type="button"><span>💬</span>Mensagens<small>Textos editáveis do Launcher</small></button>
+            <button class="quick-action" data-open-tab="history" type="button"><span>🧾</span>Histórico<small>Pagamentos e comandos</small></button>
+          </div>
+
+          <div class="form-card" style="margin-top:11px">
+            <div class="section-title"><div><h3>Comandos avançados</h3><p>Recursos gerais do Launcher. O bloqueio total não aparece aqui para evitar uso indevido.</p></div><span class="pill info">APK</span></div>
+            <div class="quick-actions">
+              <button class="quick-action" data-command="sync_apps" type="button"><span>🔄</span>Sincronizar apps<small>Atualizar a lista da Box</small></button>
+              <button class="quick-action" data-open-tab="install" type="button"><span>📥</span>Instalar APK<small>Abrir catálogo autorizado</small></button>
+              <button class="quick-action" data-command="uninstall_app" type="button"><span>🗑️</span>Desinstalar<small>Remover aplicativo escolhido</small></button>
+              <button class="quick-action" data-command="send_file" type="button"><span>📄</span>Enviar arquivo<small>Arquivo permitido ao dispositivo</small></button>
+              <button class="quick-action" data-command="set_wallpaper" type="button"><span>🖼️</span>Trocar visual<small>Papel de parede e aparência</small></button>
+            </div>
+          </div>
+        </section>
+
+        <section class="pane" data-pane="billing">
+          <div class="section-title">
+            <div><h3>Cobrança mensal, PIX e WhatsApp</h3><p>Os dados são salvos pelo RPC seguro criado no 12C-25.</p></div>
+            <span class="pill billing">APPS ONLY</span>
+          </div>
+
+          <div class="form-card">
+            <div class="form-grid three">
+              <div class="field"><label>Título da cobrança</label><input id="billingTitle" placeholder="Mensalidade JC Launcher"></div>
+              <div class="field"><label>Valor mensal</label><input id="billingAmount" inputmode="decimal" placeholder="30,00"></div>
+              <div class="field"><label>WhatsApp para contato</label><input id="billingWhatsapp" placeholder="(31) 99999-9999"></div>
+              <div class="field"><label>Mostrar a partir do dia</label><input id="billingDisplayFrom" type="number" min="1" max="28" value="5"></div>
+              <div class="field"><label>Dia do vencimento</label><input id="billingDueDay" type="number" min="1" max="28" value="10"></div>
+              <div class="field"><label>Bloquear apps após quantos dias</label><input id="billingBlockAfter" type="number" min="0" max="30" value="1"><small>Dia 10 + 1 = bloqueio a partir do dia 11.</small></div>
+            </div>
+          </div>
+
+          <div class="form-card">
+            <h4>Dados do pagamento</h4>
+            <div class="form-grid three">
+              <div class="field"><label>Nome do recebedor</label><input id="billingReceiver" placeholder="Nome exibido na TV"></div>
+              <div class="field"><label>Banco</label><input id="billingBank" placeholder="Ex.: Nubank"></div>
+              <div class="field"><label>Conta / identificação</label><input id="billingAccount" placeholder="Conta principal"></div>
+              <div class="field"><label>Tipo da chave PIX</label><select id="billingPixType"><option value="">Selecione</option><option value="phone">Telefone</option><option value="cpf">CPF</option><option value="cnpj">CNPJ</option><option value="email">E-mail</option><option value="random">Aleatória</option></select></div>
+              <div class="field"><label>Chave PIX</label><input id="billingPixKey" placeholder="Chave principal"></div>
+              <div class="field"><label>PIX copia e cola</label><input id="billingPixCopy" placeholder="Código completo do PIX"></div>
+              <div class="field full"><label>QR Code / payload</label><input id="billingQrPayload" placeholder="URL da imagem ou conteúdo configurado para o APK"></div>
+              <div class="field full"><label>Link de pagamento</label><input id="billingPaymentUrl" placeholder="https://..."></div>
+            </div>
+          </div>
+
+          <div class="form-card">
+            <h4>Mensagem e comportamento</h4>
+            <div class="field"><label>Mensagem principal da cobrança</label><textarea id="billingMessage" rows="3" placeholder="Sua mensalidade da JC Launcher está disponível para pagamento."></textarea></div>
+            <div class="form-grid three" style="margin-top:10px">
+              <div class="check-row"><input id="billingEnabled" type="checkbox"><label for="billingEnabled"><b>Cobrança ativa</b><small>Exibir todo mês no período configurado.</small></label></div>
+              <div class="check-row"><input id="billingReminder" type="checkbox"><label for="billingReminder"><b>Lembrete ativo</b><small>Mostrar aviso antes do vencimento.</small></label></div>
+              <div class="check-row"><input id="billingAllowDismiss" type="checkbox"><label for="billingAllowDismiss"><b>Permitir fechar</b><small>O cliente pode recolher o aviso.</small></label></div>
+              <div class="check-row"><input id="billingRepeat" type="checkbox"><label for="billingRepeat"><b>Repetir mensalmente</b><small>Criar ciclo a cada novo mês.</small></label></div>
+              <div class="check-row"><input id="billingAutoRelease" type="checkbox"><label for="billingAutoRelease"><b>Liberar após pagamento</b><small>Gera comandos de liberação dos apps.</small></label></div>
+              <div class="check-row"><input checked disabled type="checkbox"><label><b>Bloqueio somente de apps</b><small>Regra fixa; não pode ser alterada aqui.</small></label></div>
+            </div>
+            <div class="form-actions">
+              <button class="btn blue" id="previewBillingBtn" type="button">Ver na demonstração</button>
+              <button class="btn green" id="saveBillingBtn" data-jc-action-kind="action" data-jc-function-category="JC Launcher" data-jc-function-id="launcher.billing.save" data-jc-function-name="Salvar cobrança do Launcher" type="button">Salvar cobrança</button>
+            </div>
+          </div>
+
+          <div class="cycle-box">
+            <div><b id="cycleTitle">Ciclo atual: não criado</b><small id="cycleDescription">O ciclo será criado automaticamente pela rotina diária ou ao confirmar o pagamento.</small></div>
+            <button class="btn amber" id="confirmPaymentBtn" type="button">Confirmar pagamento</button>
+          </div>
+        </section>
+
+        <section class="pane" data-pane="apps">
+          <div class="section-title">
+            <div><h3>Aplicativos vinculados à mensalidade</h3><p>Somente estes aplicativos serão bloqueados quando o ciclo ficar vencido.</p></div>
+            <span class="pill success">SEM BLOQUEIO TOTAL</span>
+          </div>
+          <div class="warning-banner">Use o nome exato do pacote Android. Exemplo: <code>com.google.android.youtube.tv</code>. A Launcher inteira continuará disponível.</div>
+          <div class="form-card">
+            <div class="app-add">
+              <div class="field"><label>Nome do aplicativo</label><input id="appTargetName" placeholder="Ex.: YouTube"></div>
+              <div class="field"><label>Nome do pacote</label><input id="appTargetPackage" placeholder="com.exemplo.aplicativo"></div>
+              <button class="btn green" id="addAppTargetBtn" type="button">Adicionar</button>
+            </div>
+            <div class="check-row" style="margin-top:9px"><input id="appTargetAllDevices" type="checkbox"><label for="appTargetAllDevices"><b>Aplicar a todas as Boxes desta conta</b><small>Desmarcado: vale somente para a Box selecionada.</small></label></div>
+          </div>
+          <div class="app-list" id="appTargetList"></div>
+        </section>
+
+
+        <section class="pane" data-pane="install">
+          <div class="section-title"><div><h3>Aplicativos liberados para instalação</h3><p>A liberação vale para todas as Boxes deste cliente. Os APKs vêm do GitHub oficial; no UniTV Free, CONFIGs e arquivos extras continuam seguindo a lógica existente do Supabase.</p></div><span class="pill info">DINÂMICO</span></div>
+          <div class="rule-banner"><strong>Separação segura:</strong> esta lista não altera “Aplicativos cobrados”. Ela controla somente quais APKs aparecem na área de instalação da Launcher.</div>
+          <div class="app-list" id="installCatalogList"><div class="empty">Carregando catálogo...</div></div>
+        </section>
+
+
+        <section class="pane" data-pane="favorites">
+          <div class="section-title"><div><h3>Favoritos da tela inicial</h3><p>Adicione pelo nome do pacote, altere a ordem e sincronize com a Box. Os favoritos locais continuam compatíveis.</p></div><span class="pill info">REMOTO</span></div>
+          <div class="form-card"><div class="app-add"><div class="field"><label>Nome do aplicativo</label><input id="favoriteAppName" placeholder="Ex.: YouTube"></div><div class="field"><label>Pacote Android</label><input id="favoritePackage" placeholder="com.google.android.youtube.tv"></div><button class="btn green" id="addFavoriteBtn" type="button">Adicionar</button></div></div>
+          <div class="app-list" id="favoriteList"><div class="empty">Carregando favoritos...</div></div>
+          <div class="form-actions"><button class="btn blue" id="saveFavoritesBtn" type="button">Salvar e sincronizar</button></div>
+        </section>
+
+        <section class="pane" data-pane="equipment">
+          <div class="section-title">
+            <div><h3>Cadastro e devolução do equipamento</h3><p>Esta é a única área onde o bloqueio total pode ser habilitado.</p></div>
+            <span class="pill violet" id="equipmentModeBadge">PRÓPRIO</span>
+          </div>
+          <div class="rule-banner"><strong>Aparelho do cliente:</strong> nunca recebe bloqueio total por cobrança. <strong>Aparelho alugado ou emprestado:</strong> pode receber bloqueio total somente quando houver solicitação de devolução.</div>
+          <div class="form-card">
+            <div class="equipment-grid">
+              <div class="field"><label>Tipo de propriedade</label><select id="equipmentOwnership"><option value="customer_owned">Aparelho do cliente</option><option value="rented">Aparelho alugado</option><option value="loaned">Aparelho emprestado</option></select></div>
+              <div class="field"><label>Tipo de equipamento</label><input id="equipmentType" value="tv_box" placeholder="tv_box"></div>
+              <div class="field"><label>Número de série</label><input id="equipmentSerial" placeholder="Opcional"></div>
+              <div class="field"><label>Patrimônio / etiqueta</label><input id="equipmentAsset" placeholder="Opcional"></div>
+              <div class="field full"><label>Observações</label><textarea id="equipmentNotes" placeholder="Informações do aparelho, acessórios e estado de entrega."></textarea></div>
+              <div class="check-row full"><input id="equipmentFullBlock" type="checkbox"><label for="equipmentFullBlock"><b>Permitir bloqueio total ao solicitar devolução</b><small>Disponível apenas para equipamento alugado ou emprestado.</small></label></div>
+            </div>
+            <div class="form-actions"><button class="btn green" id="saveEquipmentBtn" type="button">Salvar equipamento</button></div>
+          </div>
+
+          <div class="equipment-status">
+            <div><b id="equipmentStatusTitle">Equipamento ainda não cadastrado</b><small id="equipmentStatusText">Salve o tipo de propriedade para liberar as ações de devolução.</small></div>
+            <span class="pill info" id="equipmentStatusBadge">NÃO CADASTRADO</span>
+          </div>
+
+          <div class="danger-zone">
+            <h4>Solicitação de devolução</h4>
+            <p>Use somente quando o aparelho pertence ao responsável e foi cedido ao cliente. O texto é editável e deve informar a devolução de forma clara.</p>
+            <div class="field"><label>Mensagem exibida na Box</label><textarea id="equipmentReturnMessage" rows="4"></textarea></div>
+            <div class="check-row" style="margin-top:9px"><input id="equipmentRequestBlock" type="checkbox"><label for="equipmentRequestBlock"><b>Bloquear a Launcher inteira nesta solicitação</b><small>Somente se o cadastro estiver como alugado/emprestado e a opção acima estiver habilitada.</small></label></div>
+            <div class="danger-actions" style="margin-top:10px">
+              <button class="btn red" id="requestReturnBtn" type="button">Solicitar devolução</button>
+              <button class="btn green" id="markReturnedBtn" type="button">Marcar como devolvido</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="pane" data-pane="messages">
+          <div class="section-title">
+            <div><h3>Mensagens editáveis</h3><p>Textos usados pela cobrança, bloqueio de aplicativos e devolução de equipamento.</p></div>
+            <span class="pill info">5 MODELOS</span>
+          </div>
+          <div class="message-list" id="messageList"></div>
+        </section>
+
+        <section class="pane" data-pane="history">
+          <div class="section-title">
+            <div><h3>Histórico e sincronização</h3><p>Ciclos mensais, comandos enviados à Box e auditoria da conexão.</p></div>
+            <button class="btn small blue" id="refreshHistoryBtn" type="button">↻ Atualizar</button>
+          </div>
+          <div class="form-card history-filter-card"><div class="form-grid four"><div class="field"><label>Período</label><select id="historyPeriod"><option value="all">Todo período</option><option value="7">Últimos 7 dias</option><option value="30">Últimos 30 dias</option><option value="90">Últimos 90 dias</option></select></div><div class="field"><label>Tipo de ação</label><select id="historyTypeFilter"><option value="all">Todas as ações</option><option value="login">Login e conexão</option><option value="install">Instalações</option><option value="config">Arquivos e ativação</option><option value="command">Comandos remotos</option><option value="billing">Cobrança e bloqueio</option><option value="favorite">Favoritos</option><option value="license">Licenças e créditos</option><option value="device">Box / aparelho</option><option value="sync">Sincronização</option></select></div><div class="field"><label>Aplicativo / pacote</label><input id="historyAppFilter" placeholder="Nome ou pacote"></div><div class="field"><label>Resultado</label><select id="historyStatusFilter"><option value="all">Todos</option><option value="success">Sucesso</option><option value="error">Erro</option></select></div></div></div>
+          <div class="history-columns">
+            <div class="history-card"><h4>Ciclos mensais</h4><div class="timeline-list" id="cycleHistory"></div></div>
+            <div class="history-card"><h4>Comandos enviados à Box</h4><div class="timeline-list" id="commandHistory"></div></div>
+            <div class="history-card"><h4>Auditoria de sincronização</h4><div class="timeline-list" id="syncAuditHistory"></div></div>
+            <div class="history-card"><h4>Histórico da Launcher</h4><div class="timeline-list" id="launcherEventHistory"></div></div>
+            <div class="history-card"><h4>Automação diária</h4><div id="automationStatus"></div></div>
+          </div>
+        </section>
+      </div>
+    </section>
+  </section>
+</main>
+
+<div class="modal" id="deviceModal">
+  <div class="modal-box">
+    <h3>Cadastrar TV Box</h3>
+    <div class="form-grid box-first-grid">
+      <div class="field full"><label>Nome da Box</label><input id="deviceName" value="Nova Box" placeholder="Ex.: Sala, Quarto, Cliente João"></div>
+      <div class="field hidden"><label>Versão</label><select id="deviceEdition"><option value="lite">Launcher Lite</option><option value="pro">Launcher Pro</option></select></div>
+      <div class="field hidden"><label>Modelo</label><input id="deviceModel" placeholder="Ex.: MXQ Pro 4K"></div>
+      <div class="notice full"><b>Fluxo oficial:</b> primeiro cadastre a Box pelo nome. Depois selecione essa Box e clique em <b>Acesso</b> para criar usuário e senha.</div>
+    </div>
+    <div class="modal-actions"><button class="btn" data-close type="button">Cancelar</button><button class="btn green" id="saveDeviceBtn" type="button">Salvar Box</button></div>
+  </div>
+</div>
+
+<div class="modal" id="licenseModal">
+  <div class="modal-box">
+    <h3>Licença da Box</h3>
+    <div class="form-grid">
+      <div class="field"><label>Versão</label><select id="licenseEdition"><option value="lite">Launcher Lite</option><option value="pro">Launcher Pro</option></select></div>
+      <div class="field"><label>Meses / créditos</label><input id="licenseMonths" type="number" min="1" max="120" value="1"></div>
+    </div>
+    <div class="notice">A quantidade de meses corresponde à quantidade de créditos consumidos: 1 crédito = 1 mês = 1 Box.</div>
+    <div class="modal-actions"><button class="btn" data-close type="button">Cancelar</button><button class="btn green" id="saveLicenseBtn" type="button">Liberar / renovar</button></div>
+  </div>
+</div>
+
+<div class="modal" id="commandModal">
+  <div class="modal-box">
+    <h3 id="commandTitle">Enviar comando</h3>
+    <div class="field"><label>Detalhes, pacote ou endereço do arquivo/APK</label><textarea id="commandPayload" rows="4" placeholder="Preencha somente quando o comando precisar de informação adicional."></textarea></div>
+    <div class="modal-actions"><button class="btn" data-close type="button">Cancelar</button><button class="btn blue" id="sendCommandBtn" type="button">Adicionar à fila</button></div>
+  </div>
+</div>
+
+
+<div class="modal" id="launcherAccessModal">
+  <div class="modal-box access-modal-box">
+    <h3>Acesso da JC Launcher</h3>
+    <p class="modal-subtitle">Gere o usuário no padrão <strong>JC-L-Nome</strong>. A senha aparece somente no momento da criação ou redefinição.</p>
+    <div class="selected-box-access-card" id="launcherAccessSelectedBoxCard" hidden></div>
+
+    <div class="form-grid">
+      <div class="field full">
+        <label>Cliente / responsável</label>
+        <select id="launcherAccessOwner"></select>
+      </div>
+      <div class="field">
+        <label>Usuário</label>
+        <input id="launcherAccessUsername" placeholder="JC-L-NomeDoCliente">
+      </div>
+      <div class="field">
+        <label>Versão autorizada</label>
+        <select id="launcherAccessEdition">
+          <option value="lite">JC Launcher Lite</option>
+          <option value="pro">JC Launcher Pro</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Regra comercial</label>
+        <select id="launcherAccessPolicy"><option value="credits">Por créditos — cadastra quantas Boxes quiser</option><option value="admin_unlimited">ADM — cadastra quantas Boxes quiser</option><option value="lifetime_benefit">Vitalício — 50 no benefício inicial + créditos depois</option></select>
+      </div>
+      <div class="field hidden" id="launcherAccessAdminCapField">
+        <label>Cadastro de Boxes</label>
+        <input id="launcherAccessMaxDevices" type="number" min="1" max="999999" value="999999">
+        <small>Interno: cadastro sem limite fixo. Vitalício mantém benefício inicial de 50; acima disso usa créditos.</small>
+      </div>
+      <div class="field">
+        <label>Status</label>
+        <select id="launcherAccessStatus">
+          <option value="active">Ativo</option>
+          <option value="disabled">Desativado</option>
+          <option value="expired">Expirado</option>
+        </select>
+      </div>
+      <div class="field full">
+        <label>Validade opcional</label>
+        <input id="launcherAccessExpires" type="datetime-local">
+      </div>
+    </div>
+
+    <div class="access-status-card access-unlimited-note"><b>Regra oficial: cadastro de Boxes sem limite fixo</b><span>ADM, clientes por créditos e vitalícios podem cadastrar quantas Boxes quiserem. No vitalício, o benefício inicial cobre até 50; passando disso, usa compra de créditos.</span></div>
+
+    <div class="access-status-card" id="launcherAccessStatusCard">
+      <b>Acesso ainda não consultado</b>
+      <span>Selecione o cliente para carregar os dados.</span>
+    </div>
+
+    <div class="access-secret" id="launcherAccessSecret" hidden>
+      <small>SENHA GERADA — COPIE AGORA</small>
+      <strong id="launcherAccessGeneratedPassword">—</strong>
+      <span>A senha completa não fica disponível para consulta depois que esta janela for fechada.</span>
+    </div>
+
+    <div class="access-message-preview" id="launcherAccessMessagePreview">Gere o acesso para montar a mensagem de envio.</div>
+
+    <div class="access-device-list" id="launcherAccessDeviceList"></div>
+
+    <div class="modal-actions access-modal-actions">
+      <button class="btn" data-close type="button">Fechar</button>
+      <button class="btn" id="launcherAccessSaveBtn" type="button">Salvar regras</button>
+      <button class="btn amber" id="launcherAccessGenerateBtn" type="button">Gerar / redefinir senha</button>
+      <button class="btn blue" id="launcherAccessCopyBtn" type="button">Copiar acesso</button>
+      <button class="btn green" id="launcherAccessWhatsappBtn" type="button">Enviar no WhatsApp</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal" id="deleteBoxModal">
+  <div class="modal-box">
+    <h3>Excluir Box com segurança</h3>
+    <div class="danger-zone"><p>Esta ação revoga a sessão, desvincula o aparelho e remove comandos pendentes, mas preserva o histórico e não apaga o cliente.</p><div id="deleteBoxIdentity" class="access-status-card"></div><div class="field"><label>Digite EXCLUIR para confirmar</label><input id="deleteBoxConfirmText" autocomplete="off" placeholder="EXCLUIR"></div></div>
+    <div class="modal-actions"><button class="btn" data-close type="button">Cancelar</button><button class="btn red" id="confirmDeleteBoxBtn" type="button">Excluir definitivamente</button></div>
+  </div>
+</div>
+
+<div class="loading-overlay" id="loadingOverlay"><div class="loading-card" id="loadingText">Carregando</div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="dados/supabase-config.js"></script>
+<script src="dados/common.js"></script>
+<script src="dados/jc-box-control.js?v=20260704-12D08-UNITV-CONFIG-ANTES-APK"></script>
+<script src="dados/admin-gate.js" data-title="JC Box Control" data-description="Controle das Boxes liberadas para esta conta." data-roles="admin,client" data-back-url="geradores/" data-back-label="← Voltar ao painel do cliente"></script>
+</body>
+</html>

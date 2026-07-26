@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#071118">
+<title>Criador de HTML | JC-APK TV</title>
+<link rel="stylesheet" href="dados/common.css">
+<link rel="stylesheet" href="dados/admin-gate.css">
+<script>document.documentElement.classList.add('jc-admin-checking');</script>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;color:#fff;font-family:Arial,Helvetica,sans-serif;background:#071118;padding:18px;position:relative;isolation:isolate}body:before{content:"";position:fixed;inset:0;z-index:-2;background:url('assets/jc-apk-background.webp') center/cover no-repeat;filter:brightness(.25) saturate(1.05)}body:after{content:"";position:fixed;inset:0;z-index:-1;background:linear-gradient(120deg,rgba(2,8,14,.96),rgba(5,20,31,.86))}.wrap{width:min(1180px,100%);margin:auto}.top{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 18px;border:1px solid rgba(255,255,255,.11);border-radius:21px;background:rgba(7,20,32,.92);box-shadow:0 22px 70px rgba(0,0,0,.35);backdrop-filter:blur(14px)}.brand{display:flex;align-items:center;gap:12px}.logo{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(145deg,#1c91ff,#27ddff);color:#03121d;font-size:24px;font-weight:1000}.top h1{font-size:clamp(20px,4vw,32px);margin:0}.top p{margin:5px 0 0;color:#9eb2bf;line-height:1.45}.btn{border:1px solid rgba(255,255,255,.12);border-radius:11px;padding:10px 13px;background:#173149;color:#fff;text-decoration:none;font-weight:850;cursor:pointer}.btn:hover{filter:brightness(1.08)}.btn.green{background:#25d366;color:#052117;border-color:transparent}.btn.red{background:rgba(255,92,111,.13);color:#ffd3db;border-color:rgba(255,92,111,.34)}.hero{margin-top:15px;padding:19px;border:1px solid rgba(255,255,255,.11);border-radius:20px;background:rgba(8,24,38,.9)}.hero h2{margin:0 0 6px}.hero p{margin:0;color:#9eb2bf;line-height:1.55}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin-top:15px}.creator-card{display:grid;grid-template-rows:1fr auto;gap:16px;min-height:220px;padding:20px;border:1px solid rgba(255,255,255,.12);border-radius:20px;background:linear-gradient(145deg,rgba(16,43,65,.94),rgba(8,25,39,.94));box-shadow:0 16px 45px rgba(0,0,0,.23)}.creator-card.add{border-style:dashed;background:linear-gradient(145deg,rgba(37,211,102,.08),rgba(8,25,39,.9))}.creator-icon{width:54px;height:54px;border-radius:16px;display:grid;place-items:center;font-size:29px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.11)}.creator-card h3{font-size:21px;margin:12px 0 7px}.creator-card p{margin:0;color:#9eb2bf;line-height:1.5}.meta{margin-top:10px;font-size:11px;color:#7f98a8}.actions{display:flex;gap:8px;flex-wrap:wrap}.actions .btn{flex:1;text-align:center;white-space:nowrap}.modal{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:10px;background:rgba(0,0,0,.78);backdrop-filter:blur(8px)}.modal.open{display:flex}.modal-box{width:min(640px,100%);max-height:94vh;overflow:auto;border:1px solid rgba(255,255,255,.12);border-radius:21px;background:#091b2a;box-shadow:0 30px 90px rgba(0,0,0,.55)}.modal-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:15px 17px;border-bottom:1px solid rgba(255,255,255,.1)}.modal-head h3{margin:0}.modal-body{padding:17px}.field{display:grid;gap:6px;margin:10px 0}.field label{font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.05em;color:#c9d9e5}.field input,.field textarea,.field select{width:100%;padding:11px 12px;border-radius:11px;border:1px solid rgba(255,255,255,.13);background:#061521;color:#fff}.field textarea{min-height:95px;resize:vertical}.notice{padding:12px;border:1px solid rgba(255,191,71,.26);border-radius:12px;background:rgba(255,191,71,.07);color:#ffe3ac;font-size:12px;line-height:1.5}.status{min-height:20px;margin-top:9px;color:#ffb3bd;font-size:12px}.empty{padding:26px;text-align:center;color:#91a6b3;border:1px dashed rgba(255,255,255,.16);border-radius:16px}.footer{text-align:center;color:#7f94a1;font-size:12px;margin:17px 0 3px}@media(max-width:720px){body{padding:8px}.top{align-items:flex-start;flex-direction:column}.grid{grid-template-columns:1fr}.creator-card{min-height:190px}.actions .btn{min-width:120px}}
+</style>
+<link rel="stylesheet" href="dados/jc-responsive-backgrounds.css?v=20260621-07G">
+</head>
+<body data-jc-bg-mobile="general">
+<main class="wrap">
+<header class="top"><div class="brand"><div class="logo">🧩</div><div><h1>Criador de HTML</h1><p>Escolha qual projeto deseja editar ou cadastre outro criador.</p></div></div><a class="btn" href="index.html">← Voltar ao painel</a></header>
+<section class="hero"><h2>Central de criadores</h2><p>Os dois criadores principais já estão incorporados. Os nomes podem ser alterados sem mudar os arquivos internos. Criadores adicionais ficam salvos neste navegador e podem ser exportados novamente como HTML.</p></section>
+<section class="grid" id="creatorGrid"></section>
+<div class="footer">Desenvolvido por JC-APK TV</div>
+</main>
+
+<div class="modal" id="editorModal"><div class="modal-box"><div class="modal-head"><h3 id="editorTitle">Editar criador</h3><button class="btn red" type="button" data-close>Fechar</button></div><div class="modal-body">
+<input id="editId" type="hidden">
+<div class="field"><label>Nome exibido</label><input id="editName" maxlength="80"></div>
+<div class="field"><label>Descrição</label><textarea id="editDescription" maxlength="300"></textarea></div>
+<div class="field"><label>Ícone</label><input id="editIcon" maxlength="10" placeholder="Ex.: 📱"></div>
+<div class="field"><label>Ordem</label><input id="editOrder" type="number" min="0" step="1"></div>
+<div class="actions"><button class="btn green" id="saveEdit" type="button">Salvar alterações</button></div><div class="status" id="editStatus"></div>
+</div></div></div>
+
+<div class="modal" id="addModal"><div class="modal-box"><div class="modal-head"><h3>Adicionar novo criador</h3><button class="btn red" type="button" data-close>Fechar</button></div><div class="modal-body">
+<div class="notice"><b>Como funciona:</b> escolha um arquivo HTML de criador. Ele será guardado no armazenamento interno deste navegador. Para usar em outro aparelho ou publicar permanentemente no GitHub, baixe o arquivo novamente e envie-o ao projeto.</div>
+<div class="field"><label>Nome do criador</label><input id="addName" maxlength="80" placeholder="Ex.: Criador de Cardápio"></div>
+<div class="field"><label>Descrição</label><textarea id="addDescription" maxlength="300" placeholder="Explique o que este criador faz"></textarea></div>
+<div class="field"><label>Ícone</label><input id="addIcon" maxlength="10" value="🧩"></div>
+<div class="field"><label>Arquivo HTML</label><input id="addFile" type="file" accept=".html,text/html"></div>
+<div class="actions"><button class="btn green" id="saveNew" type="button">Adicionar criador</button></div><div class="status" id="addStatus"></div>
+</div></div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="dados/supabase-config.js"></script>
+<script src="dados/common.js"></script>
+<script src="dados/admin-gate.js" data-title="Central de Criadores" data-description="Entre com sua conta de administrador para liberar os criadores de HTML." data-back-url="index.html"></script>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const BUILTINS=[
+ {id:'app',name:'Painel Aplicativo',description:'Edite o HTML atual do aplicativo, botões, links, códigos, vídeos e a playlist de músicas.',icon:'📱',href:'criador-html.html',order:10,builtin:true},
+ {id:'attendant',name:'Criador de Atendente',description:'Crie e edite a atendente, funções, valores, identidade, teste, redes sociais, aparência e pedidos.',icon:'🤖',href:'criador-atendente.html',order:20,builtin:true}
+];
+const META_KEY='jc_creator_center_meta_v1';
+const DB_NAME='jc_creator_center_files';
+const STORE='creators';
+let db=null,items=[];
+function esc(v){return String(v||'').replace(/[&<>"']/g,s=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));}
+function loadMeta(){try{return JSON.parse(localStorage.getItem(META_KEY)||'{}')}catch(e){return{}}}
+function saveMeta(meta){localStorage.setItem(META_KEY,JSON.stringify(meta));}
+function openDb(){return new Promise((resolve,reject)=>{const req=indexedDB.open(DB_NAME,1);req.onupgradeneeded=()=>{const d=req.result;if(!d.objectStoreNames.contains(STORE))d.createObjectStore(STORE,{keyPath:'id'})};req.onsuccess=()=>{db=req.result;resolve(db)};req.onerror=()=>reject(req.error)});}
+function allCustom(){return new Promise((resolve,reject)=>{const tx=db.transaction(STORE,'readonly'),req=tx.objectStore(STORE).getAll();req.onsuccess=()=>resolve(req.result||[]);req.onerror=()=>reject(req.error)});}
+function putCustom(row){return new Promise((resolve,reject)=>{const tx=db.transaction(STORE,'readwrite'),req=tx.objectStore(STORE).put(row);req.onsuccess=()=>resolve();req.onerror=()=>reject(req.error)});}
+function delCustom(id){return new Promise((resolve,reject)=>{const tx=db.transaction(STORE,'readwrite'),req=tx.objectStore(STORE).delete(id);req.onsuccess=()=>resolve();req.onerror=()=>reject(req.error)});}
+function merged(){const meta=loadMeta();return [...BUILTINS.map(x=>({...x,...(meta[x.id]||{})})),...items.map(x=>({...x,...(meta[x.id]||{})}))].sort((a,b)=>Number(a.order||0)-Number(b.order||0)||String(a.name).localeCompare(String(b.name),'pt-BR'));}
+function card(x){return `<article class="creator-card"><div><div class="creator-icon">${esc(x.icon||'🧩')}</div><h3>${esc(x.name)}</h3><p>${esc(x.description||'Criador HTML personalizado.')}</p><div class="meta">${x.builtin?'Criador incorporado ao projeto':'Criador adicional salvo neste navegador'}</div></div><div class="actions"><button class="btn green" data-open="${esc(x.id)}" type="button">Abrir criador</button><button class="btn" data-edit="${esc(x.id)}" type="button">Editar nome</button>${x.builtin?'':`<button class="btn" data-download="${esc(x.id)}" type="button">Baixar HTML</button><button class="btn red" data-delete="${esc(x.id)}" type="button">Excluir</button>`}</div></article>`}
+function render(){const list=merged();$('creatorGrid').innerHTML=list.map(card).join('')+`<article class="creator-card add"><div><div class="creator-icon">＋</div><h3>Adicionar novo criador</h3><p>Inclua outro arquivo HTML de criador sem alterar os dois projetos atuais.</p></div><div class="actions"><button class="btn green" id="addCreatorBtn" type="button">＋ Adicionar criador</button></div></article>`;bind();}
+function find(id){return merged().find(x=>x.id===id)}
+function bind(){document.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>openCreator(find(b.dataset.open)));document.querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>openEdit(find(b.dataset.edit)));document.querySelectorAll('[data-download]').forEach(b=>b.onclick=()=>downloadCreator(find(b.dataset.download)));document.querySelectorAll('[data-delete]').forEach(b=>b.onclick=()=>removeCreator(find(b.dataset.delete)));$('addCreatorBtn').onclick=()=>{clearAdd();$('addModal').classList.add('open')}}
+function openCreator(x){if(!x)return;if(x.builtin){location.href=x.href;return}const blob=new Blob([x.html||''],{type:'text/html;charset=utf-8'});const url=URL.createObjectURL(blob);const w=window.open(url,'_blank');if(!w)alert('O navegador bloqueou a nova aba. Permita pop-ups para abrir o criador.');setTimeout(()=>URL.revokeObjectURL(url),60000)}
+function openEdit(x){if(!x)return;$('editId').value=x.id;$('editName').value=x.name;$('editDescription').value=x.description||'';$('editIcon').value=x.icon||'🧩';$('editOrder').value=Number(x.order||0);$('editStatus').textContent='';$('editorTitle').textContent='Editar '+x.name;$('editorModal').classList.add('open')}
+$('saveEdit').onclick=async()=>{const id=$('editId').value,x=find(id);if(!x)return;const patch={name:$('editName').value.trim()||x.name,description:$('editDescription').value.trim(),icon:$('editIcon').value.trim()||'🧩',order:Number($('editOrder').value)||0};const meta=loadMeta();meta[id]=patch;saveMeta(meta);if(!x.builtin){const original=items.find(y=>y.id===id);Object.assign(original,patch);await putCustom(original)}$('editStatus').style.color='#8ef0b1';$('editStatus').textContent='Alterações salvas.';render();setTimeout(()=>$('editorModal').classList.remove('open'),500)};
+function clearAdd(){$('addName').value='';$('addDescription').value='';$('addIcon').value='🧩';$('addFile').value='';$('addStatus').textContent=''}
+$('saveNew').onclick=async()=>{try{const file=$('addFile').files[0],name=$('addName').value.trim();if(!name)throw new Error('Informe o nome do criador.');if(!file)throw new Error('Selecione o arquivo HTML.');const html=await file.text();if(!/<html[\s>]/i.test(html)||!/<\/html>/i.test(html))throw new Error('O arquivo selecionado não parece ser um HTML completo.');const id='custom-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,7);const row={id,name,description:$('addDescription').value.trim(),icon:$('addIcon').value.trim()||'🧩',order:100+items.length,html,fileName:file.name,builtin:false,createdAt:new Date().toISOString()};await putCustom(row);items.push(row);$('addStatus').style.color='#8ef0b1';$('addStatus').textContent='Criador adicionado com sucesso.';render();setTimeout(()=>$('addModal').classList.remove('open'),650)}catch(e){$('addStatus').style.color='#ffb3bd';$('addStatus').textContent=e.message||String(e)}};
+function downloadCreator(x){if(!x||x.builtin)return;const blob=new Blob([x.html||''],{type:'text/html;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=x.fileName||((x.name||'criador').replace(/[^a-z0-9]+/gi,'-')+'.html');document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),5000)}
+async function removeCreator(x){if(!x||x.builtin)return;if(!confirm('Excluir o criador "'+x.name+'" deste navegador?'))return;await delCustom(x.id);items=items.filter(y=>y.id!==x.id);const meta=loadMeta();delete meta[x.id];saveMeta(meta);render()}
+document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>b.closest('.modal').classList.remove('open'));document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open')}));
+(async()=>{try{await openDb();items=await allCustom();render()}catch(e){$('creatorGrid').innerHTML='<div class="empty">Não foi possível abrir o armazenamento local deste navegador: '+esc(e.message||e)+'</div>'}})();
+})();
+</script>
+</body>
+</html>

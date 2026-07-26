@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="pt-BR" class="jc-admin-checking">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#061522">
+  <title>Inventário dos Aparelhos | JC-APK TV</title>
+  <link rel="stylesheet" href="dados/common.css">
+  <link rel="stylesheet" href="dados/jc-responsive-backgrounds.css?v=20260720-02">
+  <link rel="stylesheet" href="dados/device-inventory.css">
+</head>
+<body data-jc-bg="modern-data">
+  <div class="inv-wrap">
+    <header class="inv-top">
+      <div class="inv-brand"><div class="inv-logo">JC</div><div><h1>Inventário dos Aparelhos</h1><small>Dados técnicos recebidos das Boxes</small></div></div>
+      <nav class="inv-actions"><button class="inv-btn primary" id="invReload" type="button">↻ Atualizar</button><a class="inv-btn" href="jc-box-control.html">JC Box Control</a><a class="inv-btn" href="index.html">← Painel</a></nav>
+    </header>
+    <main class="inv-main">
+      <section class="inv-hero"><h2>Inventário técnico das Boxes</h2><p>Consulte modelo, fabricante, processador, placa, memória, armazenamento e Android sem misturar estas informações com os comandos do JC Box Control.</p><div class="inv-note"><b>Coleta progressiva:</b> quando a Launcher ainda não enviou algum dado, o campo aparece como “Não informado”. O painel passa a exibir automaticamente assim que o APK enviar a informação.</div></section>
+      <section class="inv-stats"><article class="inv-stat"><small>Aparelhos cadastrados</small><b id="invTotal">0</b></article><article class="inv-stat"><small>Online</small><b id="invOnline">0</b></article><article class="inv-stat"><small>Offline</small><b id="invOffline">0</b></article><article class="inv-stat"><small>Ficha incompleta</small><b id="invIncomplete">0</b></article></section>
+      <section class="inv-card"><div class="inv-filters"><div class="inv-field"><label>Buscar</label><input id="invSearch" placeholder="Cliente, modelo, processador, placa ou ID"></div><div class="inv-field"><label>Status</label><select id="invStatusFilter"><option value="">Todos</option><option value="online">Online</option><option value="offline">Offline</option></select></div><div class="inv-field"><label>Versão</label><select id="invEditionFilter"><option value="">Lite e Pro</option><option value="lite">Lite</option><option value="pro">Pro</option></select></div><button class="inv-btn primary" type="button" onclick="document.getElementById('invSearch').value='';document.getElementById('invStatusFilter').value='';document.getElementById('invEditionFilter').value='';document.getElementById('invSearch').dispatchEvent(new Event('input'))">Limpar filtros</button></div><div class="inv-status" id="invStatus">Aguardando validação administrativa...</div><div class="inv-list" id="invList"><div class="inv-empty">Carregando inventário...</div></div></section>
+    </main>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="dados/supabase-config.js"></script>
+  <script src="dados/common.js"></script>
+  <script src="dados/admin-gate.js" data-title="Inventário dos Aparelhos" data-description="Somente o administrador pode consultar dados técnicos das Boxes." data-roles="admin"></script>
+  <script src="dados/device-inventory.js"></script>
+</body>
+</html>

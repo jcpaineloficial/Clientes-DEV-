@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="pt-BR" class="jc-admin-checking">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#061522">
+  <title>Consumo do Supabase | JC-APK TV</title>
+  <link rel="stylesheet" href="dados/common.css">
+  <link rel="stylesheet" href="dados/jc-responsive-backgrounds.css?v=20260720-02">
+  <style>
+    :root{--bg:#061522;--card:#0a1b2a;--line:rgba(255,255,255,.12);--muted:#9eb2c3;--blue:#1c91ff;--green:#29d391;--yellow:#f8bc45;--red:#ff6578}
+    *{box-sizing:border-box}body{background:radial-gradient(circle at top right,rgba(28,145,255,.15),transparent 35%),var(--bg);color:#fff;margin:0}.wrap{width:min(1180px,calc(100% - 24px));margin:20px auto 50px}.head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}.head h1,.head h2{margin:0 0 5px}.muted{color:var(--muted);line-height:1.55}.actions{display:flex;gap:8px;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 14px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.05);color:#fff;text-decoration:none;font-weight:900;cursor:pointer}.btn.primary{background:var(--blue);border-color:transparent}.btn:disabled{opacity:.55;cursor:wait}.notice{margin:15px 0;padding:14px;border:1px solid rgba(41,211,145,.3);border-radius:15px;background:rgba(41,211,145,.07);line-height:1.55}.notice.warn{border-color:rgba(248,188,69,.34);background:rgba(248,188,69,.07)}.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.metric,.card{border:1px solid var(--line);border-radius:18px;background:rgba(10,27,42,.93);box-shadow:0 16px 45px rgba(0,0,0,.2)}.metric{padding:17px}.metric small{display:block;color:var(--muted);font-weight:850}.metric strong{display:block;margin-top:9px;font-size:clamp(22px,4vw,32px)}.card{padding:18px;margin-top:14px}.activity{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:13px}.activity div{padding:13px;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.025)}.activity b{display:block;font-size:22px}.activity span{font-size:12px;color:var(--muted)}.chart{height:230px;display:flex;align-items:flex-end;gap:4px;padding:16px 8px 5px;border:1px solid var(--line);border-radius:14px;background:rgba(0,0,0,.12);overflow:hidden;margin-top:14px}.chart-col{flex:1;min-width:5px;height:100%;display:flex;align-items:flex-end;position:relative}.chart-bar{width:100%;min-height:2px;border-radius:5px 5px 2px 2px;background:linear-gradient(180deg,var(--blue),var(--green));transition:height .25s ease}.chart-col:hover .chart-tip{display:block}.chart-tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);z-index:2;white-space:nowrap;padding:6px 8px;border-radius:8px;background:#020c13;border:1px solid var(--line);font-size:11px}.bars{display:grid;gap:10px;margin-top:14px}.bar-row{display:grid;grid-template-columns:minmax(130px,1fr) minmax(160px,3fr) auto;gap:10px;align-items:center}.bar-label{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:800}.bar-track{height:12px;border-radius:99px;background:rgba(255,255,255,.07);overflow:hidden}.bar-fill{height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--blue),var(--green));min-width:2px}.bar-value{color:var(--muted);white-space:nowrap}.table-wrap{overflow:auto;margin-top:13px;border:1px solid var(--line);border-radius:14px}.table{width:100%;border-collapse:collapse;min-width:690px}.table th,.table td{padding:11px 12px;border-bottom:1px solid var(--line);text-align:left;font-size:13px}.table th{background:rgba(0,0,0,.16);color:#bfd0dc}.empty{text-align:center!important;color:var(--muted);padding:22px!important}.status{min-height:22px;margin-top:12px;color:#bfe9ff}.status.error{color:#ffc2ca}.meta{display:flex;gap:8px 18px;flex-wrap:wrap;margin-top:10px;color:var(--muted);font-size:12px}.economy{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:13px}.economy div{padding:13px;border:1px solid rgba(41,211,145,.22);border-radius:13px;background:rgba(41,211,145,.045)}
+    .account-controls{display:flex;gap:9px;align-items:end;flex-wrap:wrap}.account-controls label{display:grid;gap:6px;color:var(--muted);font-size:12px;font-weight:850}.account-controls input,.account-controls select{min-height:42px;padding:9px 11px;border:1px solid var(--line);border-radius:11px;background:#061522;color:#fff}.account-metrics{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:14px}.account-metric{padding:13px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.025)}.account-metric small{display:block;color:var(--muted);font-weight:800}.account-metric b{display:block;margin-top:7px;font-size:21px}.usage-good{color:#7ff0bd}.usage-warn{color:#ffd379}.usage-bad{color:#ff8796}.account-name b,.account-name small{display:block}.account-name small{margin-top:4px;color:var(--muted)}.usage-badge{display:inline-flex;padding:5px 8px;border-radius:999px;font-size:11px;font-weight:950;background:rgba(255,255,255,.07);border:1px solid var(--line)}.account-table .number-cell{text-align:right;white-space:nowrap}.account-note{margin-top:10px;color:var(--muted);font-size:12px;line-height:1.5}.account-status{min-height:22px;margin-top:10px;color:#bfe9ff}.account-status.error{color:#ffc2ca}
+    @media(max-width:900px){.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.activity{grid-template-columns:repeat(2,minmax(0,1fr))}.account-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.bar-row{grid-template-columns:1fr}.bar-value{justify-self:start}}
+    @media(max-width:600px){.metrics,.activity,.economy,.account-metrics{grid-template-columns:1fr}.account-controls{display:grid;grid-template-columns:1fr}.account-controls .btn{width:100%}.wrap{width:min(100% - 16px,1180px)}.chart{height:180px;gap:2px}}
+  </style>
+</head>
+<body data-jc-bg="modern-data">
+  <main class="wrap">
+    <div class="head">
+      <div><h1>Consumo do Supabase</h1><div class="muted">Resumo leve do banco, Storage e atividade, com gráficos internos.</div></div>
+      <div class="actions"><button class="btn primary" id="refreshBtn" type="button">Atualizar agora</button><a class="btn" id="openDashboard" href="https://supabase.com/dashboard" target="_blank" rel="noopener">Abrir Supabase</a><a class="btn" href="index.html">← Voltar</a></div>
+    </div>
+    <div class="notice"><b>Consumo mínimo:</b> consulta somente ao abrir ou ao apertar “Atualizar agora”. Cache local de 15 minutos.</div>
+    <div class="notice warn"><b>Importante:</b> os gráficos mostram dados internos do projeto. Egress e invocações oficiais do plano ainda ficam no painel oficial do Supabase.</div>
+    <section id="loadingState" class="card">Aguardando validação administrativa...</section>
+    <div id="status" class="status"></div>
+    <section id="usageContent" hidden>
+      <div class="metrics">
+        <article class="metric"><small>Banco de dados</small><strong id="databaseSize">—</strong></article>
+        <article class="metric"><small>Storage total</small><strong id="storageSize">—</strong></article>
+        <article class="metric"><small>Arquivos no Storage</small><strong id="storageObjects">—</strong></article>
+        <article class="metric"><small>Eventos em 30 dias</small><strong id="activity30d">—</strong></article>
+      </div>
+      <section class="card"><div class="head"><div><h2>Atividade dos últimos 30 dias</h2><div class="muted">Cada barra representa um dia.</div></div></div><div id="dailyChart" class="chart" aria-label="Gráfico de atividade diária"></div><div class="activity"><div><b id="activityToday">0</b><span>Hoje</span></div><div><b id="activity7d">0</b><span>Últimos 7 dias</span></div><div><b id="real30d">0</b><span>Reais em 30 dias</span></div><div><b id="test30d">0</b><span>Testes em 30 dias</span></div><div><b id="activity30dMirror">0</b><span>Total em 30 dias</span></div></div><div id="scopeNote" class="meta"></div></section>
+      <section class="card" id="accountUsageCard">
+        <div class="head">
+          <div><h2>Consumo mensal por conta principal</h2><div class="muted">Acompanhamento exclusivo do ADM. Soma a conta principal com todos os clientes vinculados, sem listar os clientes finais.</div></div>
+          <div class="account-controls">
+            <label>Mês de referência<input id="accountUsageMonth" type="month"></label>
+            <label>Exibir<select id="accountUsageFilter"><option value="activity">Somente com atividade</option><option value="waste">Somente com desperdício</option><option value="all">Todas as contas</option></select></label>
+            <button class="btn primary" id="accountUsageRefresh" type="button">Atualizar mês agora</button>
+          </div>
+        </div>
+        <div class="notice"><b>Histórico permanente:</b> cada mês fica salvo separadamente. A consulta pesada ocorre no máximo uma vez a cada 7 dias, ou quando o ADM força a atualização.</div>
+        <div class="account-metrics">
+          <div class="account-metric"><small>Contas acompanhadas</small><b id="accountTotalAccounts">—</b></div>
+          <div class="account-metric"><small>Códigos gerados</small><b id="accountTotalCodes">—</b></div>
+          <div class="account-metric"><small>Códigos ativados</small><b id="accountTotalUsedCodes">—</b></div>
+          <div class="account-metric"><small>CONFIGs sem uso</small><b id="accountUnusedConfigs">—</b></div>
+          <div class="account-metric"><small>Possível desperdício</small><b id="accountUnusedBytes">—</b></div>
+        </div>
+        <div id="accountUsageStatus" class="account-status">Aguardando carregamento...</div>
+        <div class="table-wrap account-table"><table class="table"><thead><tr><th>Conta principal</th><th>Vinculados</th><th>Códigos</th><th>Ativados</th><th>Sem uso</th><th>Vencidos</th><th>CONFIGs</th><th>CONFIGs usadas</th><th>CONFIGs sem uso</th><th>Dados gerados</th><th>Possível desperdício</th><th>Aproveitamento</th></tr></thead><tbody id="accountUsageBody"><tr><td colspan="12" class="empty">Carregando acompanhamento...</td></tr></tbody></table></div>
+        <div class="meta"><span>Resumo atualizado em: <b id="accountUsageUpdatedAt">—</b></span><span>Origem: <b id="accountUsageSource">—</b></span></div>
+        <div class="account-note">O cálculo considera somente ativações reais. Testes de 3 dias não entram nesses totais. “Possível desperdício” corresponde a CONFIGs reservadas/geradas que não tiveram confirmação de ativação no mês.</div>
+      </section>
+      <section class="card"><div class="head"><div><h2>Storage por bucket</h2><div class="muted">Comparação do espaço ocupado pelos buckets.</div></div></div><div id="bucketChart" class="bars"></div><div class="table-wrap"><table class="table"><thead><tr><th>Bucket</th><th>Tamanho</th><th>Arquivos</th><th>Bytes</th></tr></thead><tbody id="bucketBody"></tbody></table></div></section>
+      <section class="card"><div class="head"><div><h2>Maiores tabelas do banco</h2><div class="muted">As tabelas públicas que mais ocupam espaço.</div></div></div><div id="tableChart" class="bars"></div><div class="table-wrap"><table class="table"><thead><tr><th>Tabela</th><th>Tamanho</th><th>Linhas estimadas</th><th>Bytes</th></tr></thead><tbody id="tableBody"></tbody></table></div></section>
+      <section class="card"><div class="head"><div><h2>Economia aplicada</h2><div class="muted">Regras para evitar consumo desnecessário.</div></div></div><div class="economy"><div><b>Sem atualização automática</b><br><span class="muted">A tela só consulta quando é aberta ou atualizada manualmente.</span></div><div><b>Cache local de 15 minutos</b><br><span class="muted">Reabrir não consulta imediatamente.</span></div><div><b>APKs e mídias no GitHub</b><br><span class="muted">Arquivos grandes ficam fora do Supabase.</span></div><div><b>Somente eventos importantes</b><br><span class="muted">Sem registro de cada clique.</span></div></div><div class="meta"><span>Gerado em: <b id="generatedAt">—</b></span><span>Fonte: <b id="dataSource">—</b></span></div></section>
+    </section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="dados/supabase-config.js"></script>
+  <script src="dados/common.js"></script>
+  <script src="dados/admin-gate.js" data-title="Consumo do Supabase" data-description="Somente administradores podem visualizar os dados de consumo do projeto."></script>
+  <script src="dados/supabase-usage-admin.js"></script>
+</body>
+</html>

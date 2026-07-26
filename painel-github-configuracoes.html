@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#061522">
+  <title>GitHub e Configurações | JC-APK TV</title>
+  <link rel="stylesheet" href="dados/common.css">
+  <link rel="stylesheet" href="dados/jc-responsive-backgrounds.css?v=20260720-02">
+  <style>
+    :root{--bg:#061522;--card:#0b1e2e;--card2:#10283c;--line:rgba(151,205,245,.16);--muted:#a9bfd1;--green:#29d391;--blue:#39a9ff;--warn:#ffbf47}
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;color:#eef8ff;background:radial-gradient(circle at 10% 0%,rgba(39,145,255,.16),transparent 32%),linear-gradient(145deg,#04101b,#071b2a 52%,#061522);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    .wrap{width:min(1180px,calc(100% - 28px));margin:0 auto;padding:24px 0 42px}
+    .head{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:16px}
+    h1,h2,h3,p{margin-top:0}.head h1{margin-bottom:8px;font-size:clamp(28px,5vw,44px)}
+    .muted{color:var(--muted);line-height:1.55}.actions{display:flex;flex-wrap:wrap;gap:9px;justify-content:flex-end}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:42px;padding:10px 14px;border:1px solid var(--line);border-radius:12px;background:rgba(13,35,53,.86);color:#eef8ff;text-decoration:none;font-weight:800;cursor:pointer}
+    .btn:hover{border-color:rgba(57,169,255,.55);transform:translateY(-1px)}.btn.primary{background:linear-gradient(135deg,#168eea,#22b9f5);color:#03121d;border:0}.btn:disabled{opacity:.55;cursor:wait;transform:none}
+    .notice{padding:13px 15px;border:1px solid rgba(41,211,145,.24);border-radius:14px;background:rgba(41,211,145,.065);color:#dfffee;margin-bottom:15px;line-height:1.55}
+    .summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:14px}.summary article,.panel{border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,rgba(16,40,60,.94),rgba(8,27,42,.94));box-shadow:0 18px 40px rgba(0,0,0,.2)}
+    .summary article{padding:18px}.summary small{display:block;color:var(--muted);margin-bottom:8px}.summary strong{font-size:clamp(22px,4vw,34px)}
+    .panel{padding:18px;margin-bottom:14px}.panel-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:15px}.panel h2{margin-bottom:5px}
+    .repo-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.repo{border:1px solid var(--line);border-radius:17px;background:rgba(6,22,35,.72);padding:16px;min-width:0}.repo.error{border-color:rgba(255,95,95,.36)}
+    .repo-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.repo-title{display:flex;gap:11px;align-items:flex-start;min-width:0}.repo-icon{width:43px;height:43px;flex:0 0 43px;display:grid;place-items:center;border-radius:13px;background:rgba(57,169,255,.12);font-size:22px}.repo h3{margin:0 0 4px;font-size:18px}.repo-type{color:var(--muted);font-size:12px}.repo-size{text-align:right;white-space:nowrap;font-size:20px;font-weight:950}.repo-size small{display:block;font-size:11px;color:var(--muted);font-weight:700;margin-top:3px}
+    .bar{height:10px;border-radius:99px;background:rgba(255,255,255,.07);overflow:hidden;margin:15px 0 11px}.bar span{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,#168eea,#29d391);transition:width .35s ease}
+    .meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:13px}.meta div{padding:9px 10px;border-radius:11px;background:rgba(255,255,255,.035);min-width:0}.meta small{display:block;color:var(--muted);font-size:11px;margin-bottom:4px}.meta b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px}
+    .repo-actions{display:flex;flex-wrap:wrap;gap:8px}.repo-actions .btn{flex:1 1 150px;min-height:39px;font-size:12px}.repo-actions .update{border-color:rgba(41,211,145,.28);background:rgba(41,211,145,.08)}
+    .status{min-height:22px;margin:8px 0 12px;color:var(--muted)}.status.error{color:#ffaaa8}.loading{padding:18px;border:1px solid var(--line);border-radius:15px;background:rgba(11,30,46,.85)}
+    .rules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.rule{padding:13px;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.03)}.rule b{display:block;margin-bottom:5px}.rule span{color:var(--muted);font-size:13px;line-height:1.45}
+    .footer-note{font-size:12px;color:var(--muted);text-align:center;margin-top:16px}
+    @media(max-width:850px){.summary{grid-template-columns:1fr 1fr}.repo-grid{grid-template-columns:1fr}.rules{grid-template-columns:1fr}.head{flex-direction:column}.actions{justify-content:flex-start}}
+    @media(max-width:560px){.wrap{width:min(100% - 16px,1180px);padding-top:14px}.summary{grid-template-columns:1fr}.repo-top{flex-direction:column}.repo-size{text-align:left}.meta{grid-template-columns:1fr}}
+  </style>
+</head>
+<body data-jc-bg="modern-data">
+  <main class="wrap">
+    <header class="head">
+      <div>
+        <h1>GitHub e Configurações</h1>
+        <p class="muted">Uso dos arquivos e atalhos diretos para atualizar o painel, autoatendimento, APKs, mídias e ROMs.</p>
+      </div>
+      <div class="actions">
+        <button class="btn primary" id="refreshBtn" type="button">Atualizar dados</button>
+        <a class="btn" href="index.html">← Voltar</a>
+      </div>
+    </header>
+
+    <div class="notice"><b>Sem uso do Supabase:</b> esta página consulta somente informações públicas do GitHub. Nenhum APK, vídeo, mídia ou ROM passa pelo Supabase. Os dados ficam em cache neste navegador por 1 hora.</div>
+
+    <section class="summary" aria-label="Resumo do GitHub">
+      <article><small>Uso total monitorado</small><strong id="totalSize">—</strong></article>
+      <article><small>Projetos monitorados</small><strong id="projectCount">5</strong></article>
+      <article><small>Arquivos nas Releases</small><strong id="releaseAssetCount">—</strong></article>
+    </section>
+
+    <div id="status" class="status">Carregando dados públicos do GitHub...</div>
+    <section id="loadingState" class="loading">Consultando somente agora...</section>
+
+    <section class="panel" id="usagePanel" hidden>
+      <div class="panel-head">
+        <div><h2>Uso e atualizações</h2><div class="muted">O tamanho dos repositórios é lido no GitHub. Nos projetos de download, o valor soma os arquivos da Release configurada.</div></div>
+      </div>
+      <div class="repo-grid" id="repoGrid"></div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head"><div><h2>Como usar</h2><div class="muted">Os botões apenas levam você à área correta do GitHub. Para alterar arquivos, o GitHub solicitará a conta com permissão no repositório.</div></div></div>
+      <div class="rules">
+        <div class="rule"><b>Painel e Autoatendimento</b><span>Use “Enviar atualização” para abrir a tela de upload da branch principal.</span></div>
+        <div class="rule"><b>APKs, Mídias e ROMs</b><span>Use “Editar Release” para adicionar, remover ou substituir os arquivos publicados.</span></div>
+        <div class="rule"><b>Consumo mínimo</b><span>São no máximo cinco consultas públicas por hora neste navegador, sem atualização automática em segundo plano.</span></div>
+      </div>
+    </section>
+
+    <div class="footer-note">JC-APK TV • GitHub e Configurações</div>
+  </main>
+  <script src="dados/github-configuracoes-admin.js"></script>
+</body>
+</html>

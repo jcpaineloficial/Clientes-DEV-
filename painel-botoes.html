@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="pt-BR" class="jc-admin-checking">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#06111d">
+  <title>Gerenciador de Botões | JC-APK TV</title>
+  <link rel="stylesheet" href="dados/common.css">
+  <link rel="stylesheet" href="dados/admin-gate.css">
+  <link rel="stylesheet" href="dados/button-manager.css">
+<link rel="stylesheet" href="dados/jc-responsive-backgrounds.css?v=20260621-07G">
+</head>
+<body data-jc-bg="modern-data">
+  <main class="pbm-wrap">
+    <header class="pbm-top">
+      <div class="pbm-brand"><div class="pbm-logo">🛠️</div><div><h1>Gerenciador de Botões do Painel</h1><p>Ative ou coloque em manutenção os botões principais disponíveis para os clientes.</p></div></div>
+      <a class="pbm-back" href="index.html">← Voltar ao painel</a>
+    </header>
+
+    <section class="pbm-summary" aria-label="Resumo dos botões">
+      <div class="pbm-stat"><b id="pbmTotal">0</b><small>Botões cadastrados</small></div>
+      <div class="pbm-stat"><b id="pbmActive">0</b><small>Ativos</small></div>
+      <div class="pbm-stat"><b id="pbmMaintenance">0</b><small>Em manutenção</small></div>
+    </section>
+
+    <section class="pbm-tools">
+      <input id="pbmSearch" class="pbm-search" type="search" placeholder="Buscar por nome, categoria ou identificador">
+      <div class="pbm-actions">
+        <button id="pbmReloadBtn" class="pbm-btn" type="button">↻ Atualizar lista</button>
+        <button id="pbmSyncBtn" class="pbm-btn primary" type="button">⟳ Sincronizar botões do painel</button>
+      </div>
+    </section>
+    <div id="pbmStatus" class="pbm-status" role="status">Aguardando validação administrativa...</div>
+    <section id="pbmList" class="pbm-list" aria-live="polite"></section>
+  </main>
+
+  <section id="pbmEditModal" class="pbm-modal" aria-hidden="true">
+    <div class="pbm-modal-card">
+      <h2 id="pbmEditTitle">Mensagem de manutenção</h2>
+      <p>Esta mensagem será mostrada quando o cliente clicar no botão durante a manutenção.</p>
+      <input id="pbmEditId" type="hidden">
+      <textarea id="pbmMessage"></textarea>
+      <div class="pbm-modal-actions"><button class="pbm-btn" data-close-modal type="button">Cancelar</button><button id="pbmPreviewBtn" class="pbm-btn blue" type="button">Visualizar mensagem</button><button id="pbmSaveMaintenanceBtn" class="pbm-btn amber" type="button">Salvar e colocar em manutenção</button></div>
+    </div>
+  </section>
+
+  <section id="pbmMessageModal" class="pbm-modal" aria-hidden="true">
+    <div class="pbm-modal-card" style="text-align:center"><div style="font-size:42px">🛠️</div><h2 id="pbmMessageTitle">Função em manutenção</h2><p id="pbmMessagePreview"></p><div class="pbm-modal-actions" style="justify-content:center"><button class="pbm-btn primary" data-close-modal type="button">Entendi</button></div></div>
+  </section>
+
+  <section id="pbmHistoryModal" class="pbm-modal" aria-hidden="true">
+    <div class="pbm-modal-card"><h2 id="pbmHistoryTitle">Histórico</h2><div id="pbmHistoryList" class="pbm-history"></div><div class="pbm-modal-actions"><button class="pbm-btn" data-close-modal type="button">Fechar</button></div></div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="dados/supabase-config.js"></script>
+  <script src="dados/common.js"></script>
+  <script src="dados/admin-gate.js" data-title="Gerenciador de Botões do Painel" data-description="Somente administradores podem ativar ou colocar funções em manutenção." data-back-url="index.html"></script>
+  <script src="dados/button-manager.js?v=20260720-03"></script>
+</body>
+</html>
