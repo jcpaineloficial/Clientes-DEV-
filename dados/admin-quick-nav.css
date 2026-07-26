@@ -1,0 +1,57 @@
+.jc-admin-nav{margin:0;min-width:0}
+.jc-admin-nav>summary{
+  display:none;
+  align-items:center;
+  justify-content:space-between;
+  min-height:43px;
+  padding:10px 13px;
+  border:1px solid rgba(126,184,226,.22);
+  border-radius:12px;
+  background:rgba(255,255,255,.055);
+  color:#fff;
+  cursor:pointer;
+  list-style:none;
+  font-weight:900;
+}
+.jc-admin-nav>summary::-webkit-details-marker{display:none}
+.jc-admin-nav>summary::after{content:"Abrir";color:#9fd7ff;font-size:10px;text-transform:uppercase}
+.jc-admin-nav[open]>summary::after{content:"Fechar"}
+.jc-admin-nav:not([open])>.jc-admin-nav-links{display:flex}
+@media(max-width:760px){
+  .jc-admin-nav{width:100%}
+  .jc-admin-nav>summary{display:flex}
+  .jc-admin-nav:not([open])>.jc-admin-nav-links{display:none!important}
+  .jc-admin-nav[open]>.jc-admin-nav-links{
+    display:grid!important;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    width:100%;
+    margin-top:8px;
+  }
+  .jc-admin-nav-links>a,.jc-admin-nav-links>button{width:100%;min-width:0;text-align:center}
+}
+@media(max-width:420px){.jc-admin-nav[open]>.jc-admin-nav-links{grid-template-columns:1fr}}
+
+.jc-report-area-menu{
+  margin:0 0 15px;
+  border:1px solid rgba(93,170,255,.25);
+  border-radius:15px;
+  background:rgba(33,140,255,.07);
+  overflow:hidden;
+}
+.jc-report-area-menu>summary{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:13px 14px;
+  cursor:pointer;
+  list-style:none;
+  color:#e0f2ff;
+  font-weight:900;
+}
+.jc-report-area-menu>summary::-webkit-details-marker{display:none}
+.jc-report-area-menu>summary::after{content:"Abrir áreas";color:#8fd4ff;font-size:10px;text-transform:uppercase}
+.jc-report-area-menu[open]>summary::after{content:"Fechar áreas"}
+.jc-report-area-menu>.tabs{padding:0 12px 12px;margin:0}
+

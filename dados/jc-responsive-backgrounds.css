@@ -1,0 +1,110 @@
+/* ============================================================
+   JC-APK TV — Fundos responsivos do projeto
+   Etapa: 07G-FUNDOS-RESPONSIVOS-LIMPOS
+   Correção: o fundo novo é aplicado diretamente no body para
+   não ficar escondido atrás do fundo sólido da página.
+   ============================================================ */
+
+html{background:#020712}
+
+/* Fundo novo: painel inicial e páginas que antes tinham apenas gradiente. */
+body[data-jc-bg="modern"],
+body[data-jc-bg="modern-data"]{
+  min-height:100vh!important;
+  background-color:#020712!important;
+  background-repeat:no-repeat!important;
+  background-size:cover!important;
+  background-position:center center!important;
+  background-attachment:fixed!important;
+}
+
+body[data-jc-bg="modern"]{
+  background-image:
+    linear-gradient(115deg,rgba(1,6,16,.64),rgba(1,8,20,.30) 55%,rgba(1,5,15,.42)),
+    url('../assets/jc-apk-bg-modern-desktop.webp')!important;
+}
+
+body[data-jc-bg="modern-data"]{
+  background-image:
+    linear-gradient(115deg,rgba(1,6,16,.68),rgba(1,8,20,.35) 55%,rgba(1,5,15,.46)),
+    url('../assets/jc-apk-bg-data-desktop.webp')!important;
+}
+
+/* Remove os fundos antigos em pseudo-elementos somente nas páginas novas. */
+body[data-jc-bg="modern"]::before,
+body[data-jc-bg="modern"]::after,
+body[data-jc-bg="modern-data"]::before,
+body[data-jc-bg="modern-data"]::after{
+  content:none!important;
+  display:none!important;
+}
+
+/* Mantém os fundos bons existentes e melhora o enquadramento no celular. */
+body[data-jc-bg-mobile="general"]::before,
+body[data-jc-bg-mobile="reports"]::before,
+body[data-jc-bg-mobile="activators"]::before{
+  background-size:cover!important;
+  background-repeat:no-repeat!important;
+  transform:none!important;
+}
+
+body[data-jc-bg-mobile="general"]::before{background-position:center center!important}
+body[data-jc-bg-mobile="reports"]::before{background-position:center center!important}
+body[data-jc-bg-mobile="activators"]::before{background-position:center center!important}
+
+@media (max-width:760px){
+  body[data-jc-bg="modern"],
+  body[data-jc-bg="modern-data"]{
+    background-attachment:scroll!important;
+    background-position:center top!important;
+  }
+
+  body[data-jc-bg="modern"]{
+    background-image:
+      linear-gradient(180deg,rgba(1,6,16,.42),rgba(1,7,18,.58)),
+      url('../assets/jc-apk-bg-modern-mobile.webp')!important;
+  }
+
+  body[data-jc-bg="modern-data"]{
+    background-image:
+      linear-gradient(180deg,rgba(1,6,16,.46),rgba(1,7,18,.62)),
+      url('../assets/jc-apk-bg-data-mobile.webp')!important;
+  }
+
+  body[data-jc-bg-mobile="general"]::before{
+    background-position:72% center!important;
+    background-attachment:scroll!important;
+  }
+
+  body[data-jc-bg-mobile="reports"]::before{
+    background-position:74% center!important;
+    background-attachment:scroll!important;
+  }
+
+  body[data-jc-bg-mobile="activators"]::before{
+    background-position:62% center!important;
+    background-attachment:scroll!important;
+  }
+
+  body[data-jc-bg-mobile="generator"]{
+    background-position:68% center!important;
+    background-attachment:scroll!important;
+  }
+
+  .maintenance-card{
+    background-position:70% center!important;
+  }
+}
+
+@media (max-width:430px){
+  body[data-jc-bg="modern"],
+  body[data-jc-bg="modern-data"]{
+    background-size:cover!important;
+    background-position:center top!important;
+  }
+
+  .maintenance-card{
+    min-height:265px!important;
+    background-position:72% center!important;
+  }
+}

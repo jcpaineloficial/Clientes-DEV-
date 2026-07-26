@@ -1,0 +1,15 @@
+/* JC-APK TV — proteção visual das páginas administrativas. */
+html:not(.jc-admin-liberado) body { visibility: hidden !important; }
+html.jc-admin-verificando body { visibility: hidden !important; }
+html.jc-admin-liberado body { visibility: visible !important; }
+#jc-admin-gate-overlay {
+  position: fixed; inset: 0; z-index: 2147483647; display: flex; align-items: center; justify-content: center;
+  padding: 24px; background: radial-gradient(circle at top, #123829 0, #07110f 46%, #020605 100%);
+  color: #eafff3; font-family: Arial, sans-serif; visibility: visible !important;
+}
+#jc-admin-gate-overlay .jc-admin-gate-box {
+  width: min(520px, 94vw); padding: 30px; border-radius: 24px; text-align: center;
+  border: 1px solid rgba(0,230,118,.28); background: rgba(5,18,15,.96); box-shadow: 0 28px 90px rgba(0,0,0,.62);
+}
+#jc-admin-gate-overlay h2 { margin: 0 0 12px; color: #b8ffd8; }
+#jc-admin-gate-overlay p { margin: 0; color: #b6cfc5; line-height: 1.65; }
