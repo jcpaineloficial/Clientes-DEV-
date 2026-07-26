@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#07040d"/>
+    <stop offset=".52" stop-color="#160720"/>
+    <stop offset="1" stop-color="#2a0a32"/>
+  </linearGradient>
+  <linearGradient id="s" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#5d29ff"/>
+    <stop offset=".45" stop-color="#c238d2"/>
+    <stop offset=".76" stop-color="#ff5b62"/>
+    <stop offset="1" stop-color="#ff8b20"/>
+  </linearGradient>
+  <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+    <feGaussianBlur stdDeviation="7" result="b"/>
+    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+</defs>
+<rect x="8" y="8" width="240" height="240" rx="42" fill="url(#bg)" stroke="#563163" stroke-width="4"/>
+<g filter="url(#glow)">
+  <path d="M180 58c-17-16-39-24-64-24-36 0-67 18-76 47-7 23 4 44 29 57 13 7 31 10 48 14 18 4 28 8 28 18 0 11-14 18-32 18-21 0-40-8-56-22l-27 29c23 23 53 35 85 35 43 0 78-21 78-58 0-31-23-47-60-56-32-8-45-10-45-22 0-10 11-17 28-17 17 0 32 6 45 17z" fill="url(#s)"/>
+  <path d="M78 75c15-15 37-21 59-16 13 3 23 8 34 17l-23 25c-8-7-17-11-28-13-14-3-28 0-36 8z" fill="#6e37ff" opacity=".95"/>
+  <path d="M178 183c-15 19-42 28-69 24-16-2-31-8-45-19l27-28c10 8 20 12 32 13 17 2 31-2 39-12z" fill="#ff7a25" opacity=".96"/>
+</g>
+<text x="128" y="238" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="31" font-weight="900" letter-spacing="4" fill="#fff">STV</text>
+</svg>
